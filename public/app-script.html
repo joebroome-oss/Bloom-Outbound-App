@@ -1,0 +1,265 @@
+<style>
+.send-error { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(255, 90, 90, 0.12); border: 1px solid rgba(255, 90, 90, 0.4); color: #ffb3b3; font-size: 13px; }
+.send-queued { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(200, 220, 120, 0.12); border: 1px solid rgba(200, 220, 120, 0.4); color: #dcead0; font-size: 13px; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-more { margin-top: 20px; padding: 12px 24px; border-radius: 999px; border: 1px solid rgba(200,220,120,0.5); background: transparent; color: #c8dc78; font-size: 14px; cursor: pointer; }
+.btn-more:hover { background: rgba(200,220,120,0.1); }
+.more-status { margin-top: 14px; font-size: 13px; color: #b7b2a3; max-width: 360px; }
+.refresh-btn { background: transparent; border: 1px solid var(--cream-12); color: var(--cream-75); border-radius: 999px; padding: 6px 14px; font-size: 12px; cursor: pointer; margin-left: 10px; }
+.refresh-btn:hover { background: rgba(255,255,255,0.06); }
+.apollo-banner { margin: 10px 0 0; padding: 10px 14px; border-radius: 8px; background: rgba(240,200,90,0.12); border: 1px solid rgba(240,200,90,0.35); color: #f0d178; font-size: 13px; max-width: 520px; }
+.loading-state { text-align: center; padding: 60px 20px; color: var(--cream-55); font-size: 15px; }
+</style>
+<script>
+const STORAGE_PREFIX = 'bloom_review_edits_v1';
+const STEP_LABELS = ['Day 0 · First touch', 'Day 3 · Bump', 'Day 7 · New angle', 'Day 12 · Deeper proof', 'Day 18 · Closing offer'];
+
+let today = null;
+let queue = [];
+let apolloConfigured = false;
+let edits = {};
+
+function loadEdits() {
+  try {
+    const raw = localStorage.getItem(STORAGE_PREFIX + ':' + today);
+    edits = raw ? JSON.parse(raw) : {};
+  } catch (e) { edits = {}; }
+}
+function saveEdits() {
+  try { localStorage.setItem(STORAGE_PREFIX + ':' + today, JSON.stringify(edits)); } catch (e) {}
+}
+
+function escapeHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+function formatDatePill(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+}
+
+function pendingItems() { return queue.filter(q => q.status === 'pending'); }
+
+function renderProgress() {
+  const row = document.getElementById('progressRow');
+  if (!row) return;
+  row.innerHTML = queue.map(q => {
+    const cls = q.status === 'pending' ? '' : 'done';
+    return `<div class="progress-seg ${cls}"></div>`;
+  }).join('');
+}
+
+function renderApolloBanner() {
+  const wrap = document.getElementById('cardWrap');
+  if (apolloConfigured) return;
+  const banner = document.createElement('div');
+  banner.className = 'apollo-banner';
+  banner.textContent = 'Apollo isn\'t connected yet — Send is disabled until an API key is added on the server. Hold still works.';
+  wrap.parentElement.insertBefore(banner, wrap);
+}
+
+function render() {
+  const pill = document.getElementById('datePill');
+  if (pill) pill.textContent = formatDatePill(today);
+  renderProgress();
+  const wrap = document.getElementById('cardWrap');
+  const actions = document.getElementById('actionsRow');
+  const pending = pendingItems();
+
+  if (!pending.length) {
+    const sent = queue.filter(q => q.status === 'sent').length;
+    const held = queue.filter(q => q.status === 'held').length;
+    wrap.innerHTML = `
+      <div class="done-screen">
+        <p class="big">All done for today</p>
+        <p>${queue.length} drafts reviewed. Next batch lands tomorrow at 9am.</p>
+        <div class="stat-row">
+          <div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>
+          <div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>
+        </div>
+        <button class="btn-more" id="moreBtn" onclick="goForMore()">Go for more ↗</button>
+        <div class="more-status" id="moreStatus" style="display:none;"></div>
+      </div>`;
+    actions.innerHTML = '';
+    return;
+  }
+
+  const item = pending[0];
+  const edit = edits[item.id] || {};
+  const bodyVal = edit.body || item.body;
+  const subjectVal = edit.subject || item.subject;
+  wrap.innerHTML = `
+    <div class="card" id="activeCard">
+      <span class="pill step${item.step}">${STEP_LABELS[item.step]}</span>
+      <p class="company">${item.company}</p>
+      <p class="contact-line">${item.contact}</p>
+      <div class="to-subject">
+        <div><b>To</b> &nbsp;${item.to}</div>
+        <div style="display:flex; align-items:center; gap:4px;"><b>Subject</b> &nbsp;<input class="subject-input" id="subjectBox" value="${subjectVal.replace(/"/g, '&quot;')}" readonly /></div>
+      </div>
+      <div class="editing-flag">Editing — changes save when you hit send</div>
+      <textarea class="body-box" id="bodyBox" readonly>${bodyVal}</textarea>
+      <div class="send-error" id="sendError" style="display:none;"></div>
+      <div class="send-queued" id="sendQueued" style="display:none;"></div>
+    </div>`;
+  renderApolloBanner();
+
+  actions.innerHTML = `
+    <button class="btn-skip" id="holdBtn" onclick="holdCurrent('${item.id}')">Hold</button>
+    <button class="btn-edit" id="editBtn" onclick="toggleEdit()">Edit</button>
+    <button class="btn-send" id="sendBtn" onclick="sendCurrent('${item.id}')" ${apolloConfigured ? '' : 'disabled title="Apollo API key not set yet"'}>Send ↗</button>
+  `;
+}
+
+function toggleEdit() {
+  const card = document.getElementById('activeCard');
+  const box = document.getElementById('bodyBox');
+  const subjectBox = document.getElementById('subjectBox');
+  const btn = document.getElementById('editBtn');
+  const isEditing = card.classList.toggle('editing');
+  box.readOnly = !isEditing;
+  subjectBox.readOnly = !isEditing;
+  btn.textContent = isEditing ? 'Done' : 'Edit';
+  if (isEditing) {
+    subjectBox.focus();
+  } else {
+    const item = pendingItems()[0];
+    if (item) {
+      edits[item.id] = { subject: subjectBox.value, body: box.value };
+      saveEdits();
+    }
+  }
+}
+
+async function holdCurrent(id) {
+  try {
+    await fetch(`/api/items/${id}/hold`, { method: 'POST' });
+  } catch (e) { console.error('hold failed', e); }
+  const item = queue.find(q => q.id === id);
+  if (item) item.status = 'held';
+  render();
+}
+
+function showSendError(msg) {
+  const box = document.getElementById('sendError');
+  if (box) { box.style.display = 'block'; box.textContent = msg; }
+  const sendBtn = document.getElementById('sendBtn');
+  const holdBtn = document.getElementById('holdBtn');
+  const editBtn = document.getElementById('editBtn');
+  if (sendBtn) { sendBtn.disabled = !apolloConfigured; sendBtn.classList.remove('sending'); sendBtn.textContent = 'Send ↗'; }
+  if (holdBtn) holdBtn.disabled = false;
+  if (editBtn) editBtn.disabled = false;
+}
+
+function showSendQueued(id, msg) {
+  const box = document.getElementById('sendQueued');
+  if (box) { box.style.display = 'block'; box.textContent = msg; }
+  const item = queue.find(q => q.id === id);
+  if (item) item.status = 'sent';
+  const sendBtn = document.getElementById('sendBtn');
+  const holdBtn = document.getElementById('holdBtn');
+  const editBtn = document.getElementById('editBtn');
+  if (sendBtn) { sendBtn.disabled = true; sendBtn.classList.remove('sending'); sendBtn.textContent = 'Queued in Apollo ✓'; }
+  if (holdBtn) holdBtn.disabled = true;
+  if (editBtn) editBtn.disabled = true;
+}
+
+async function sendCurrent(id) {
+  const item = queue.find(q => q.id === id);
+  if (!item) return;
+  const subjectBox = document.getElementById('subjectBox');
+  const bodyBox = document.getElementById('bodyBox');
+  const subject = subjectBox.value;
+  const body = bodyBox.value;
+  edits[id] = { subject, body };
+  saveEdits();
+
+  const sendBtn = document.getElementById('sendBtn');
+  const holdBtn = document.getElementById('holdBtn');
+  const editBtn = document.getElementById('editBtn');
+  sendBtn.disabled = true; holdBtn.disabled = true; editBtn.disabled = true;
+  sendBtn.classList.add('sending');
+  sendBtn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch(`/api/items/${id}/send`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to: item.to, subject, body }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showSendError(data.message || `Server error (${res.status}) — nothing confirmed sent.`);
+      return;
+    }
+    if (data.status === 'failed') {
+      showSendError(data.message);
+      return;
+    }
+    if (data.status === 'queued') {
+      showSendQueued(id, data.message);
+      return;
+    }
+    item.status = 'sent';
+    render();
+  } catch (err) {
+    console.error('Bloom send failed', err);
+    showSendError('Could not reach the server — nothing was confirmed sent. Check your connection and try again.');
+  }
+}
+
+async function goForMore() {
+  const btn = document.getElementById('moreBtn');
+  const status = document.getElementById('moreStatus');
+  if (btn) { btn.disabled = true; btn.textContent = 'Researching more…'; }
+  if (status) { status.style.display = 'block'; status.textContent = 'Asking the research job for more accounts…'; }
+  try {
+    const res = await fetch('/api/research-more', { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok) {
+      if (status) status.textContent = data.message || 'Not available yet in the standalone site.';
+    } else if (status) {
+      status.textContent = 'Done — reload to see new emails.';
+    }
+  } catch (err) {
+    console.error('goForMore failed', err);
+    if (status) status.textContent = 'Something went wrong reaching the server.';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Go for more ↗'; }
+  }
+}
+
+async function init() {
+  const wrap = document.getElementById('cardWrap');
+  wrap.innerHTML = '<div class="loading-state">Loading today\'s queue…</div>';
+  try {
+    const [healthRes, queueRes] = await Promise.all([
+      fetch('/api/health').then(r => r.json()),
+      fetch('/api/queue').then(r => r.json()),
+    ]);
+    apolloConfigured = !!healthRes.apolloConfigured;
+    today = queueRes.today;
+    queue = queueRes.queue || [];
+    loadEdits();
+    render();
+  } catch (err) {
+    console.error('init failed', err);
+    wrap.innerHTML = '<div class="loading-state">Could not load today\'s queue — check that the server is running.</div>';
+  }
+}
+
+function addRefreshButton() {
+  const bar = document.querySelector('.topbar');
+  if (!bar) return;
+  const btn = document.createElement('button');
+  btn.className = 'refresh-btn';
+  btn.textContent = 'Refresh';
+  btn.onclick = () => location.reload();
+  bar.appendChild(btn);
+}
+
+addRefreshButton();
+init();
+</script>

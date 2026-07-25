@@ -1,0 +1,115 @@
+{
+  "today": "2026-07-24",
+  "queue": [
+    {
+      "id": "marshmallow-step0",
+      "status": "pending",
+      "company": "Marshmallow",
+      "contact": "Caroline Gillard, Chief People Officer",
+      "to": "caroline.gillard@marshmallow.co",
+      "step": 0,
+      "subject": "quick one on Marshmallow",
+      "body": "Hi Caroline,\n\nmost insurtechs at your growth rate hit the point where the people managing teams were promoted for being great underwriters or engineers, not for managing.\n\nIQ-EQ hit a similar point mid-growth and used Bloom to 5x their coaching coverage without adding headcount, lifting leadership capability 42% in the process.\n\nFree pilot before anything's signed.\n\nWorth a look?\n\nJoe"
+    },
+    {
+      "id": "close-brothers-step0",
+      "status": "pending",
+      "company": "Close Brothers",
+      "contact": "Thom Crow, Head of Talent Acquisition",
+      "to": "thom.crow@closebrothers.com",
+      "step": 0,
+      "subject": "quick one on Close Brothers' restructuring",
+      "body": "Hi Thom,\n\nwith Mike Morgan settling in as Group CEO and the business cutting close to a fifth of its workforce as part of the wider cost programme, the managers left standing are under real pressure to lead through a lot of change at once.\n\nThoughtworks hit a similar wall moving fast through structural change, newly responsible managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Close Brothers?\n\nJoe"
+    },
+    {
+      "id": "quilter-step0",
+      "status": "pending",
+      "company": "Quilter",
+      "contact": "Carris Harris, Senior Human Resources Business Partner",
+      "to": "carris.harris@quilter.com",
+      "step": 0,
+      "subject": "quick one on Quilter's new leadership wave",
+      "body": "Hi Carris,\n\nwith Jo Harris and Margaret Ammon both landing on the exec committee inside a few months of each other, plus Warren Vickers stepping up to MD of Quilter Financial Planning, that's a lot of new senior leadership settling in at once.\n\nAirwallex hit a similar point scaling its leadership fast, newly appointed managers weren't equipped for the jump, and Bloom helped lift leadership capability by 42% while cutting the cost of getting there in half.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Quilter?\n\nJoe"
+    },
+    {
+      "id": "davidson-kempner-capital-management-step0",
+      "status": "pending",
+      "company": "Davidson Kempner Capital Management",
+      "contact": "Jennifer Wall, Human Resources Business Partner",
+      "to": "jwall@dkp.com",
+      "step": 0,
+      "subject": "quick one on Davidson Kempner's Income Fund II",
+      "body": "Hi Jennifer,\n\nwith Income Fund II closing north of $1.1bn and the asset-backed credit platform expanding globally, that's usually the point where people managing teams get stretched into bigger scopes fast, often before they're actually equipped for it.\n\nIQ-EQ hit a similar point scaling through a fast-growing, investor-backed phase, and used Bloom to 5x their coaching coverage without adding headcount, lifting leadership capability by 42% in the process.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing what that'd look like at Davidson Kempner?\n\nJoe"
+    },
+    {
+      "id": "gallagher-step0",
+      "status": "pending",
+      "company": "Gallagher",
+      "contact": "Jo Jones, HR Director - Specialty",
+      "to": "jo_jones@ajg.com",
+      "step": 0,
+      "subject": "quick one on Gallagher Specialty's restructure",
+      "body": "Hi Jo,\n\nbetween the shift from geography to customer-segment trading divisions and picking up Bridge Insurance Brokers and WMB Insurance Group this year, a lot of managers at Gallagher Specialty are absorbing new structure and new colleagues at the same time.\n\nInforma hit the same wall integrating through M&A with their One Informa initiative, and Bloom helped drive a 38% improvement in leadership capability with a 73% goal-completion rate in the first 90 days.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth seeing what's worked at similar integrations?\n\nJoe"
+    },
+    {
+      "id": "factset-step0",
+      "status": "pending",
+      "company": "FactSet",
+      "contact": "Jasmine Nettle, Senior Human Resources Business Partner",
+      "to": "jasmine.nettle@factset.com",
+      "step": 0,
+      "subject": "quick one on FactSet's restructuring",
+      "body": "Hi Jasmine,\n\nwith the June cuts landing and Josh Warren settling in as CFO, the managers left standing are being asked to hold bigger, leaner teams together while the business resets for AI-driven competition.\n\nThoughtworks hit a similar wall moving fast through structural change, newly responsible managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at FactSet?\n\nJoe"
+    },
+    {
+      "id": "tp-icap-step0",
+      "status": "pending",
+      "company": "TP ICAP",
+      "contact": "Kate Roberts, Global Head of Talent and Performance",
+      "to": "kate.roberts@tpicap.com",
+      "step": 0,
+      "subject": "quick one on TP ICAP's Vantage Capital Markets deal",
+      "body": "Hi Kate,\n\nwith the Vantage Capital Markets deal just completed, TP ICAP's broking teams across London, Hong Kong, Tokyo and Dubai are absorbing new desks and new managers into the fold at the same time.\n\nInforma hit the same wall integrating through M&A with their One Informa initiative, and Bloom helped drive a 38% improvement in leadership capability with a 73% goal-completion rate in the first 90 days.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth seeing what's worked at similar integrations?\n\nJoe"
+    },
+    {
+      "id": "st-jamess-place-plc-step0",
+      "status": "pending",
+      "company": "St. James's Place plc",
+      "contact": "Stephanie Crewe, Head of Talent Management & Development",
+      "to": "stephanie.crewe@sjp.co.uk",
+      "step": 0,
+      "subject": "quick one on St. James's Place's cost programme",
+      "body": "Hi Stephanie,\n\nwith Mark Fitzpatrick's cost programme cutting around 500 roles and resetting the fee model, the managers left standing are under real pressure to lead through a lot of change while still hitting the numbers.\n\nThoughtworks hit a similar wall moving fast through structural change, newly responsible managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at St. James's Place?\n\nJoe"
+    },
+    {
+      "id": "crowe-uk-step0",
+      "status": "pending",
+      "company": "Crowe UK",
+      "contact": "Tony White, Partner, Chief People Officer",
+      "to": "tony.white@crowe.co.uk",
+      "step": 0,
+      "subject": "quick one on the KKR deal at Crowe",
+      "body": "Hi Tony,\n\nwith KKR's investment moving toward close and Crowe UK still bedding in the Dendy Neville merger in Kent, that's a lot of new ownership structure and new colleagues landing on managers at once.\n\nIQ-EQ hit a similar point scaling through a PE-backed phase, and used Bloom to 5x their coaching coverage without adding headcount to HR, lifting leadership capability by 42% in the process.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing what that'd look like at Crowe?\n\nJoe"
+    },
+    {
+      "id": "revolut-ltd-step0",
+      "status": "pending",
+      "company": "Revolut Ltd.",
+      "contact": "Paul Twist, Senior People Partner (Head of Equity)",
+      "to": "paul.twist@revolut.com",
+      "step": 0,
+      "subject": "quick one on Revolut's Western Europe build-out",
+      "body": "Hi Paul,\n\nwith the new Paris HQ and 400+ hires planned across Western Europe, a lot of Revolut's newest managers are going to be leading teams for the first time in markets the business hasn't scaled in before.\n\nThoughtworks hit the same wall moving from a regional to global structure, newly appointed managers weren't equipped for the jump, and Bloom helped lift leadership capability by 42% while cutting the cost of getting there in half.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Revolut?\n\nJoe"
+    },
+    {
+      "id": "schroders-step0",
+      "status": "pending",
+      "company": "Schroders",
+      "contact": "Stephanie Ashmore, Global Head of Talent",
+      "to": "stephanie.ashmore@schroders.com",
+      "step": 0,
+      "subject": "quick one on Schroders Wealth Management's leadership reshuffle",
+      "body": "Hi Stephanie,\n\nwith a new CIO, a new Cazenove CEO, a new CEO for Europe and the Middle East, and a new global CMO all landing within weeks of each other, that's a lot of new senior leadership settling into new structures at once.\n\nMcLaren hit a similar point, technically brilliant people, not yet equipped to unlock high performance in others, and coaching moved the needle 12% on retention alone.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Schroders?\n\nJoe"
+    }
+  ]
+}

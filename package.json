@@ -1,0 +1,17 @@
+{
+  "name": "bloom-outbound-app",
+  "version": "1.0.0",
+  "description": "Standalone Bloom outbound review dashboard — daily queue, Hold/Edit/Send, direct Apollo API integration.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

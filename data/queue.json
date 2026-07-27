@@ -13,7 +13,7 @@
     },
     {
       "id": "close-brothers-step0",
-      "status": "pending",
+      "status": "sent",
       "company": "Close Brothers",
       "contact": "Thom Crow, Head of Talent Acquisition",
       "to": "thom.crow@closebrothers.com",
@@ -23,7 +23,7 @@
     },
     {
       "id": "quilter-step0",
-      "status": "pending",
+      "status": "sent",
       "company": "Quilter",
       "contact": "Carris Harris, Senior Human Resources Business Partner",
       "to": "carris.harris@quilter.com",
@@ -33,7 +33,7 @@
     },
     {
       "id": "davidson-kempner-capital-management-step0",
-      "status": "pending",
+      "status": "sent",
       "company": "Davidson Kempner Capital Management",
       "contact": "Jennifer Wall, Human Resources Business Partner",
       "to": "jwall@dkp.com",
@@ -43,7 +43,7 @@
     },
     {
       "id": "gallagher-step0",
-      "status": "pending",
+      "status": "sent",
       "company": "Gallagher",
       "contact": "Jo Jones, HR Director - Specialty",
       "to": "jo_jones@ajg.com",
@@ -53,7 +53,7 @@
     },
     {
       "id": "factset-step0",
-      "status": "pending",
+      "status": "sent",
       "company": "FactSet",
       "contact": "Jasmine Nettle, Senior Human Resources Business Partner",
       "to": "jasmine.nettle@factset.com",
@@ -83,7 +83,7 @@
     },
     {
       "id": "crowe-uk-step0",
-      "status": "pending",
+      "status": "sent",
       "company": "Crowe UK",
       "contact": "Tony White, Partner, Chief People Officer",
       "to": "tony.white@crowe.co.uk",
@@ -93,7 +93,7 @@
     },
     {
       "id": "revolut-ltd-step0",
-      "status": "pending",
+      "status": "sent",
       "company": "Revolut Ltd.",
       "contact": "Paul Twist, Senior People Partner (Head of Equity)",
       "to": "paul.twist@revolut.com",

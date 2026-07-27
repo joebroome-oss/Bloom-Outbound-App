@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 3000;
 const SYNC_SECRET = process.env.SYNC_SECRET || '';
+const MAILBOX_EMAIL = process.env.MAILBOX_EMAIL || 'joe.broome@usebloom.com';
 
 function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -78,7 +79,16 @@ app.post('/api/items/:id/send', async (req, res) => {
       return res.status(502).json({ error: 'no_draft_id', message: 'Apollo did not return a draft id — nothing was sent.' });
     }
 
-    const sendResult = await apollo.sendNow(messageId);
+    const accounts = await apollo.getEmailAccounts();
+    const mailbox = accounts.find((a) => a.email === MAILBOX_EMAIL) || accounts.find((a) => a.default) || accounts[0];
+    if (!mailbox) {
+      return res.status(422).json({
+        error: 'no_mailbox',
+        message: 'Could not find a linked sending mailbox in Apollo — nothing was sent.',
+      });
+    }
+
+    const sendResult = await apollo.sendNow(messageId, { email_account_id: mailbox.id, email: mailbox.email });
     const msg = sendResult && sendResult.emailer_message;
     const status = msg && msg.status;
 

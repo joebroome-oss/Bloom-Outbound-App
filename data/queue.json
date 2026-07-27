@@ -1,6 +1,46 @@
 {
-  "today": "2026-07-24",
+  "today": "2026-07-27",
   "queue": [
+    {
+      "id": "zopa-bank-ltd-step1",
+      "status": "pending",
+      "company": "Zopa Bank Ltd.",
+      "contact": "Iain Kendrick, Chief People Officer",
+      "to": "iain.kendrick@zopa.com",
+      "step": 1,
+      "subject": "Re: quick one on Zopa's growth blitz",
+      "body": "Hi Iain,\n\nknow inboxes get buried so just bumping this. Most FS firms in your position are paying full coaching rates for a handful of senior people, without actually being able to make sure it sticks or is trackable day to day.\n\nBloom proves ROI from day one, we tracked a 19% jump in time efficiency for MSCI's leadership team inside the first quarter.\n\nWorth a look?\n\nJoe"
+    },
+    {
+      "id": "airwallex-step1",
+      "status": "pending",
+      "company": "Airwallex",
+      "contact": "David Unwin, People Partner",
+      "to": "david.unwin@airwallex.com",
+      "step": 1,
+      "subject": "Re: quick one on Airwallex's UK expansion",
+      "body": "Hi David,\n\nknow inboxes get buried so just bumping this. Most FS firms scaling this fast are paying full coaching rates for a handful of senior people, without being able to prove it's sticking.\n\nBloom proves ROI from day one, we tracked a 19% jump in time efficiency for MSCI's leadership team inside the first quarter.\n\nWorth a look?\n\nJoe"
+    },
+    {
+      "id": "acrisure-step1",
+      "status": "pending",
+      "company": "Acrisure",
+      "contact": "Ashley Verrall, Head of Talent Development",
+      "to": "averrall@acrisure.com",
+      "step": 1,
+      "subject": "Re: quick one on Acrisure's rollup model",
+      "body": "Hi Ashley,\n\nknow inboxes get buried so bumping this. Most acquisitive firms are paying full coaching rates for a handful of senior people, without a way to prove it's actually embedding.\n\nBloom proves ROI from day one, MSCI's leadership team saw a 19% jump in time efficiency inside the first quarter.\n\nWorth a look?\n\nJoe"
+    },
+    {
+      "id": "domestic-and-general-step1",
+      "status": "pending",
+      "company": "Domestic & General",
+      "contact": "Anna Capitanio, Chief People Officer",
+      "to": "anna.capitanio@domesticandgeneral.com",
+      "step": 1,
+      "subject": "Re: saw the CPO Talk episode, Anna",
+      "body": "Hi Anna,\n\nknow inboxes get buried so bumping this. Most FS firms are paying full coaching rates for a handful of senior people, without a way to prove it's actually changing day-to-day behaviour.\n\nBloom proves ROI from day one, Informa saw a 99% coach approval rating and 73% of managers hitting their goal inside 90 days.\n\nWorth a look?\n\nJoe"
+    },
     {
       "id": "marshmallow-step0",
       "status": "pending",
@@ -12,54 +52,54 @@
       "body": "Hi Caroline,\n\nmost insurtechs at your growth rate hit the point where the people managing teams were promoted for being great underwriters or engineers, not for managing.\n\nIQ-EQ hit a similar point mid-growth and used Bloom to 5x their coaching coverage without adding headcount, lifting leadership capability 42% in the process.\n\nFree pilot before anything's signed.\n\nWorth a look?\n\nJoe"
     },
     {
-      "id": "close-brothers-step0",
-      "status": "sent",
-      "company": "Close Brothers",
-      "contact": "Thom Crow, Head of Talent Acquisition",
-      "to": "thom.crow@closebrothers.com",
-      "step": 0,
-      "subject": "quick one on Close Brothers' restructuring",
-      "body": "Hi Thom,\n\nwith Mike Morgan settling in as Group CEO and the business cutting close to a fifth of its workforce as part of the wider cost programme, the managers left standing are under real pressure to lead through a lot of change at once.\n\nThoughtworks hit a similar wall moving fast through structural change, newly responsible managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Close Brothers?\n\nJoe"
+      "id": "delta-capita-step1",
+      "status": "pending",
+      "company": "Delta Capita",
+      "contact": "Lindsay Jones, Chief People Officer",
+      "to": "lindsay.jones@deltacapita.com",
+      "step": 1,
+      "subject": "Re: quick one on the DTCC Report Hub deal",
+      "body": "Hi Lindsay,\n\nknow inboxes get buried so bumping this. Consulting firms mid-integration are usually paying full coaching rates for a handful of senior people, without proving it's embedding.\n\nBloom proves ROI from day one, MSCI's leadership team saw a 19% jump in time efficiency inside the first quarter.\n\nWorth a look?\n\nJoe"
     },
     {
-      "id": "quilter-step0",
-      "status": "sent",
-      "company": "Quilter",
-      "contact": "Carris Harris, Senior Human Resources Business Partner",
-      "to": "carris.harris@quilter.com",
-      "step": 0,
-      "subject": "quick one on Quilter's new leadership wave",
-      "body": "Hi Carris,\n\nwith Jo Harris and Margaret Ammon both landing on the exec committee inside a few months of each other, plus Warren Vickers stepping up to MD of Quilter Financial Planning, that's a lot of new senior leadership settling in at once.\n\nAirwallex hit a similar point scaling its leadership fast, newly appointed managers weren't equipped for the jump, and Bloom helped lift leadership capability by 42% while cutting the cost of getting there in half.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Quilter?\n\nJoe"
+      "id": "ally-financial-inc-step1",
+      "status": "pending",
+      "company": "Ally Financial Inc",
+      "contact": "Gilda McGee, Director of Learning and Development",
+      "to": "gilda.mcgee@ally.com",
+      "step": 1,
+      "subject": "Re: quick one on Ally's new leadership wave",
+      "body": "Hi Gilda,\n\nknow inboxes get buried so just bumping this. Most FS firms bringing in senior leaders at this pace are paying full coaching rates for a handful of people, without being able to prove it's sticking.\n\nBloom proves ROI from day one, we tracked a 19% jump in time efficiency for MSCI's leadership team inside the first quarter.\n\nWorth a look?\n\nJoe"
     },
     {
-      "id": "davidson-kempner-capital-management-step0",
-      "status": "sent",
-      "company": "Davidson Kempner Capital Management",
-      "contact": "Jennifer Wall, Human Resources Business Partner",
-      "to": "jwall@dkp.com",
-      "step": 0,
-      "subject": "quick one on Davidson Kempner's Income Fund II",
-      "body": "Hi Jennifer,\n\nwith Income Fund II closing north of $1.1bn and the asset-backed credit platform expanding globally, that's usually the point where people managing teams get stretched into bigger scopes fast, often before they're actually equipped for it.\n\nIQ-EQ hit a similar point scaling through a fast-growing, investor-backed phase, and used Bloom to 5x their coaching coverage without adding headcount, lifting leadership capability by 42% in the process.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing what that'd look like at Davidson Kempner?\n\nJoe"
+      "id": "the-nottingham-step1",
+      "status": "pending",
+      "company": "The Nottingham",
+      "contact": "Ella Keyes, Deputy Chief People Officer",
+      "to": "ella.keyes@thenottingham.com",
+      "step": 1,
+      "subject": "Re: on The Nottingham's DTRT framework",
+      "body": "Hi Ella,\n\nknow inboxes get buried so bumping this. Most building societies embedding a culture framework are paying full coaching rates for a handful of senior people, without a way to prove it's actually changing day-to-day behaviour.\n\nBloom proves ROI from day one, Informa saw a 99% coach approval rating and 73% of managers hitting their goal inside 90 days.\n\nWorth a look?\n\nJoe"
     },
     {
-      "id": "gallagher-step0",
-      "status": "sent",
-      "company": "Gallagher",
-      "contact": "Jo Jones, HR Director - Specialty",
-      "to": "jo_jones@ajg.com",
-      "step": 0,
-      "subject": "quick one on Gallagher Specialty's restructure",
-      "body": "Hi Jo,\n\nbetween the shift from geography to customer-segment trading divisions and picking up Bridge Insurance Brokers and WMB Insurance Group this year, a lot of managers at Gallagher Specialty are absorbing new structure and new colleagues at the same time.\n\nInforma hit the same wall integrating through M&A with their One Informa initiative, and Bloom helped drive a 38% improvement in leadership capability with a 73% goal-completion rate in the first 90 days.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth seeing what's worked at similar integrations?\n\nJoe"
+      "id": "ocorian-group-step1",
+      "status": "pending",
+      "company": "Ocorian Group",
+      "contact": "Fionnuala Hoy, Head of HR / Senior HRBP",
+      "to": "fionnuala.hoy@ocorian.com",
+      "step": 1,
+      "subject": "Re: quick one on Ocorian's E78 and Clarity deals",
+      "body": "Hi Fionnuala,\n\nknow inboxes get buried so bumping this. Firms mid-acquisition are usually paying full coaching rates for a handful of senior people, without proving it's embedding.\n\nBloom proves ROI from day one, MSCI's leadership team saw a 19% jump in time efficiency inside the first quarter.\n\nWorth a look?\n\nJoe"
     },
     {
-      "id": "factset-step0",
-      "status": "sent",
-      "company": "FactSet",
-      "contact": "Jasmine Nettle, Senior Human Resources Business Partner",
-      "to": "jasmine.nettle@factset.com",
-      "step": 0,
-      "subject": "quick one on FactSet's restructuring",
-      "body": "Hi Jasmine,\n\nwith the June cuts landing and Josh Warren settling in as CFO, the managers left standing are being asked to hold bigger, leaner teams together while the business resets for AI-driven competition.\n\nThoughtworks hit a similar wall moving fast through structural change, newly responsible managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at FactSet?\n\nJoe"
+      "id": "mizuho-step1",
+      "status": "pending",
+      "company": "Mizuho",
+      "contact": "Pom Davey, Executive Director Head of Talent & Inclusion and Culture Ambassador for EMEA",
+      "to": "pom.davey@mizuhoemea.com",
+      "step": 1,
+      "subject": "Re: on Mizuho's M's Circuit programme",
+      "body": "Hi Pom,\n\nknow inboxes get buried so just bumping this. Firms with strong leadership programmes already in place are usually paying full coaching rates for a handful of senior people on top, without a way to prove the combination is working.\n\nBloom proves ROI from day one, we tracked a 19% jump in time efficiency for MSCI's leadership team inside the first quarter.\n\nWorth a look?\n\nJoe"
     },
     {
       "id": "tp-icap-step0",
@@ -80,26 +120,6 @@
       "step": 0,
       "subject": "quick one on St. James's Place's cost programme",
       "body": "Hi Stephanie,\n\nwith Mark Fitzpatrick's cost programme cutting around 500 roles and resetting the fee model, the managers left standing are under real pressure to lead through a lot of change while still hitting the numbers.\n\nThoughtworks hit a similar wall moving fast through structural change, newly responsible managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at St. James's Place?\n\nJoe"
-    },
-    {
-      "id": "crowe-uk-step0",
-      "status": "sent",
-      "company": "Crowe UK",
-      "contact": "Tony White, Partner, Chief People Officer",
-      "to": "tony.white@crowe.co.uk",
-      "step": 0,
-      "subject": "quick one on the KKR deal at Crowe",
-      "body": "Hi Tony,\n\nwith KKR's investment moving toward close and Crowe UK still bedding in the Dendy Neville merger in Kent, that's a lot of new ownership structure and new colleagues landing on managers at once.\n\nIQ-EQ hit a similar point scaling through a PE-backed phase, and used Bloom to 5x their coaching coverage without adding headcount to HR, lifting leadership capability by 42% in the process.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing what that'd look like at Crowe?\n\nJoe"
-    },
-    {
-      "id": "revolut-ltd-step0",
-      "status": "sent",
-      "company": "Revolut Ltd.",
-      "contact": "Paul Twist, Senior People Partner (Head of Equity)",
-      "to": "paul.twist@revolut.com",
-      "step": 0,
-      "subject": "quick one on Revolut's Western Europe build-out",
-      "body": "Hi Paul,\n\nwith the new Paris HQ and 400+ hires planned across Western Europe, a lot of Revolut's newest managers are going to be leading teams for the first time in markets the business hasn't scaled in before.\n\nThoughtworks hit the same wall moving from a regional to global structure, newly appointed managers weren't equipped for the jump, and Bloom helped lift leadership capability by 42% while cutting the cost of getting there in half.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Revolut?\n\nJoe"
     },
     {
       "id": "schroders-step0",

@@ -431,6 +431,7 @@ function showSendQueued(id, msg) {
   if (sendBtn) { sendBtn.disabled = true; sendBtn.classList.remove('sending'); sendBtn.textContent = 'Queued in Apollo ✓'; }
   if (holdBtn) holdBtn.disabled = true;
   if (editBtn) editBtn.disabled = true;
+  setTimeout(render, 2000);
 }
 
 async function sendCurrent(id) {

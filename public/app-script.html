@@ -31,6 +31,14 @@ function saveEdits() {
 
 function escapeHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
+// Safely embed a string inside a single-quoted JS string literal in an inline
+// onclick="..." attribute. Without this, any item.id containing an apostrophe
+// (e.g. "st-james's-place-plc-step0") terminates the string early and breaks
+// the handler with a silent syntax error — the button then does nothing at all.
+function jsStr(s) {
+  return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+
 function formatDatePill(iso) {
   if (!iso) return '';
   const d = new Date(iso + 'T00:00:00');
@@ -106,9 +114,9 @@ function render() {
   renderApolloBanner();
 
   actions.innerHTML = `
-    <button class="btn-skip" id="holdBtn" onclick="holdCurrent('${item.id}')">Hold</button>
+    <button class="btn-skip" id="holdBtn" onclick="holdCurrent('${jsStr(item.id)}')">Hold</button>
     <button class="btn-edit" id="editBtn" onclick="toggleEdit()">Edit</button>
-    <button class="btn-send" id="sendBtn" onclick="sendCurrent('${item.id}')" ${apolloConfigured ? '' : 'disabled title="Apollo API key not set yet"'}>Send ↗</button>
+    <button class="btn-send" id="sendBtn" onclick="sendCurrent('${jsStr(item.id)}')" ${apolloConfigured ? '' : 'disabled title="Apollo API key not set yet"'}>Send ↗</button>
   `;
 }
 

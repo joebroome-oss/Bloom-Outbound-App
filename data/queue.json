@@ -1,5 +1,5 @@
 {
-  "today": "2026-07-28",
+  "today": "2026-07-29",
   "queue": [
     {
       "id": "marshmallow-step0",
@@ -32,46 +32,6 @@
       "status": "pending"
     },
     {
-      "id": "nationwide-building-society-step0",
-      "company": "Nationwide Building Society",
-      "contact": "Lynn McManus, Chief People Officer",
-      "to": "lynn.mcmanus@nationwide.co.uk",
-      "step": 0,
-      "subject": "quick one on Nationwide's Virgin Money integration",
-      "body": "Hi Lynn,\n\nwith 600 roles being cut as Nationwide integrates Virgin Money, the managers left standing are absorbing new teams and new structure at the same time, that's usually the moment retention either holds or quietly cracks.\n\nThoughtworks hit a similar wall moving through fast structural change, newly appointed managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Nationwide?\n\nJoe",
-      "status": "pending"
-    },
-    {
-      "id": "aviva-step0",
-      "company": "Aviva",
-      "contact": "Tim Piper, Head Of Talent Management",
-      "to": "tim.piper@aviva.com",
-      "step": 0,
-      "subject": "quick one on Aviva's Direct Line integration",
-      "body": "Hi Tim,\n\nwith the Direct Line merger now complete and GCS, commercial lines and private clients all reshaping their leadership teams within months of each other, a lot of managers are stepping into structures that didn't exist at the start of the year.\n\nInforma hit the same wall integrating through M&A with their One Informa initiative, and Bloom helped drive a 38% improvement in leadership capability with a 73% goal-completion rate in the first 90 days.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth seeing what's worked at similar integrations?\n\nJoe",
-      "status": "pending"
-    },
-    {
-      "id": "global-payments-inc-step0",
-      "company": "Global Payments Inc.",
-      "contact": "Kelsey Spooner, Human Resources Director",
-      "to": "kelsey.spooner@globalpay.com",
-      "step": 0,
-      "subject": "quick one on the Worldpay integration",
-      "body": "Hi Kelsey,\n\nwith the $24.25bn Worldpay deal now closed and Global Payments roughly doubling in scale overnight, a lot of managers are suddenly running much bigger, much less familiar teams.\n\nMorgan Stanley hit a similar wall with Executive Directors defaulting to control instead of delegating through a big structural shift, and coaching lifted leadership capability 42% inside a quarter.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Global Payments?\n\nJoe",
-      "status": "pending"
-    },
-    {
-      "id": "experian-step0",
-      "company": "Experian",
-      "contact": "James Bowie, Head of Talent, UKI and EMAP",
-      "to": "james.bowie@experian.com",
-      "step": 0,
-      "subject": "quick one on Experian's acquisition run",
-      "body": "Hi James,\n\nAtData, Own Up and Konfir in the space of a few months is a lot of new teams to fold in, especially after 16 years without a single acquisition. That's usually the point HR gets asked to do more without a bigger budget.\n\nIQ-EQ hit a similar point mid-growth and used Bloom to 5x their coaching coverage without adding headcount, lifting leadership capability 42% in the process.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth a look?\n\nJoe",
-      "status": "pending"
-    },
-    {
       "id": "rathbones-step0",
       "company": "Rathbones",
       "contact": "Beth Houghton, Head of Talent Acquisition",
@@ -89,6 +49,56 @@
       "step": 0,
       "subject": "quick one on FNZ's cost rebalancing",
       "body": "Hi Samantha,\n\nwith FNZ back in a cost-rebalancing phase after last year's $650m raise, the pressure is on to do more for leadership development without growing the bill.\n\nNASCAR were capped at coaching 35 leaders under their old setup. Moving to Bloom took that to 100 leaders, at half the typical cost, with real tracking on what was actually changing.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth a look?\n\nJoe",
+      "status": "pending"
+    },
+    {
+      "id": "hsbc-step0",
+      "company": "HSBC",
+      "contact": "Glen McGowan, Head of Talent",
+      "to": "glen.mcgowan@hsbc.com",
+      "step": 0,
+      "subject": "quick one on HSBC's AI-led restructuring",
+      "body": "Hi Glen,\n\nwith HSBC targeting an 8% cut in UK workforce costs as part of Georges Elhedery's AI-led restructuring, the managers who stay are suddenly carrying leaner teams through a lot of uncertainty.\n\nThoughtworks hit a similar wall moving fast through structural change, newly appointed managers weren't equipped for the jump, and 65% of their attrition traced straight back to it.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth seeing what's worked at similar restructures?\n\nJoe",
+      "status": "pending"
+    },
+    {
+      "id": "tsb-bank-step0",
+      "company": "TSB Bank",
+      "contact": "Ariam Enraght-Moony, Chief People Officer",
+      "to": "ariam.enraght-moony@tsb.co.uk",
+      "step": 0,
+      "subject": "quick one on TSB's Santander integration",
+      "body": "Hi Ariam,\n\nwith Santander's takeover of TSB moving through integration and a new CEO stepping in, the leadership overhaul is landing across finance, compliance and payments all at once.\n\nInforma hit the same wall integrating through M&A with their One Informa initiative, and Bloom helped drive a 38% improvement in leadership capability with a 73% goal-completion rate in the first 90 days.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing what's worked at similar integrations?\n\nJoe",
+      "status": "pending"
+    },
+    {
+      "id": "lloyds-banking-group-step0",
+      "company": "Lloyds Banking Group",
+      "contact": "Ceri Connolly, People Partnering Director, Insurance, Pensions & Investments",
+      "to": "ceri.connolly@lloydsbanking.com",
+      "step": 0,
+      "subject": "quick one on Lloyds' performance overhaul",
+      "body": "Hi Ceri,\n\nwith Charlie Nunn's performance overhaul putting roughly 3,000 roles under review across the bank, the managers now running those tough conversations are under real pressure to get it right.\n\nMcLaren hit a similar point, technically brilliant people, not yet equipped to unlock high performance in others, and coaching moved the needle 12% on retention alone.\n\nFree pilot before anything's signed, so no real downside to looking.\n\nWorth seeing how we'd approach it at Lloyds?\n\nJoe",
+      "status": "pending"
+    },
+    {
+      "id": "checkoutcom-step0",
+      "company": "Checkout.com",
+      "contact": "Adam Legge, People Director - UK & Ireland",
+      "to": "adam.legge@checkout.com",
+      "step": 0,
+      "subject": "quick one on Checkout.com's reset",
+      "body": "Hi Adam,\n\nwith the workforce reset in June and a second wave of exec departures this year, the managers still standing are absorbing more scope with less senior cover around them.\n\nIQ-EQ hit a similar point managing a cost-conscious, PE-backed phase, and used Bloom to 5x their coaching coverage without adding headcount, lifting leadership capability 42% in the process.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth a look?\n\nJoe",
+      "status": "pending"
+    },
+    {
+      "id": "nomura-step0",
+      "company": "Nomura",
+      "contact": "Michelle Lynch, Human Resources Business Partner",
+      "to": "michelle.lynch@nomura.com",
+      "step": 0,
+      "subject": "quick one on Nomura's cost drive",
+      "body": "Hi Michelle,\n\nwith the $1bn shake-up cutting into equities and investment banking, London's roughly 2,000-strong team is running leaner than it has in years.\n\nNASCAR were capped at coaching 35 leaders under their old setup. Moving to Bloom took that to 100 leaders, at half the typical cost, with real tracking on what was actually changing.\n\nFree pilot before anything's signed, no real downside to looking.\n\nWorth a look?\n\nJoe",
       "status": "pending"
     }
   ]

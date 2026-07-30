@@ -116,6 +116,16 @@ app.post('/api/items/:id/hold', (req, res) => {
   res.json({ ok: true, data });
 });
 
+// Manual override for the same-day-refresh problem: if the queue gets re-synced
+// from the Cowork scheduled task later the same day (e.g. a copy fix), the sync
+// payload resets every item's status to 'pending' — including ones Joe already
+// sent live from this site earlier that day. This lets him mark an item done
+// without calling Apollo again, so a re-sync can't cause a duplicate send.
+app.post('/api/items/:id/already-sent', (req, res) => {
+  const data = store.markStatus(req.params.id, 'already_sent');
+  res.json({ ok: true, data });
+});
+
 // Placeholder — the research/drafting brain (WebSearch + copy generation)
 // still lives in the Cowork scheduled task for now. Wire this up once that
 // logic moves server-side too.

@@ -116,14 +116,49 @@ app.post('/api/items/:id/hold', (req, res) => {
   res.json({ ok: true, data });
 });
 
-// Manual override for the same-day-refresh problem: if the queue gets re-synced
-// from the Cowork scheduled task later the same day (e.g. a copy fix), the sync
-// payload resets every item's status to 'pending' — including ones Joe already
-// sent live from this site earlier that day. This lets him mark an item done
-// without calling Apollo again, so a re-sync can't cause a duplicate send.
+// General-purpose override, not scoped to "today": marks a queue item done
+// without calling Apollo, for whenever this dashboard is showing something
+// that's already actually been sent — whether that was earlier today (e.g. a
+// same-day re-sync after a copy fix reset it to 'pending') or on a previous
+// day. Never triggers a duplicate send.
 app.post('/api/items/:id/already-sent', (req, res) => {
   const data = store.markStatus(req.params.id, 'already_sent');
   res.json({ ok: true, data });
+});
+
+// Permanently stops the automated sequence for this contact because Joe is
+// already in a live deal conversation with them elsewhere — distinct from
+// "already sent", which is just a one-time skip. Adds the contact to a fixed
+// Apollo list; tomorrow's Cowork scheduled run checks that list and writes a
+// permanent "stopped" flag into bloom_send_log.json so they're never queued
+// again. Requires the contact's email (`to`) so we can look them up in Apollo.
+app.post('/api/items/:id/existing-deal', async (req, res) => {
+  const { id } = req.params;
+  const { to } = req.body || {};
+  if (!to) {
+    return res.status(400).json({ error: 'invalid_payload', message: 'to (contact email) is required.' });
+  }
+  if (!apollo.isConfigured()) {
+    return res.status(503).json({
+      error: 'apollo_not_configured',
+      message: 'Apollo API key not set on the server yet — add APOLLO_API_KEY to flag existing deals.',
+    });
+  }
+  try {
+    const contact = await apollo.findContactByEmail(to);
+    if (!contact) {
+      return res.status(422).json({
+        error: 'contact_not_found',
+        message: `Could not find ${to} in Apollo by exact email — nothing was flagged.`,
+      });
+    }
+    await apollo.addExistingDealLabel(contact);
+    const data = store.markStatus(id, 'existing_deal');
+    return res.json({ ok: true, data });
+  } catch (err) {
+    console.error('Existing-deal flag failed', err);
+    return res.status(502).json({ error: 'apollo_error', message: err.message || 'Apollo call failed.' });
+  }
 });
 
 // Placeholder — the research/drafting brain (WebSearch + copy generation)

@@ -9,6 +9,25 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .refresh-btn:hover { background: rgba(255,255,255,0.06); }
 .apollo-banner { margin: 10px 0 0; padding: 10px 14px; border-radius: 8px; background: rgba(240,200,90,0.12); border: 1px solid rgba(240,200,90,0.35); color: #f0d178; font-size: 13px; max-width: 520px; }
 .loading-state { text-align: center; padding: 60px 20px; color: var(--cream-55); font-size: 15px; }
+.card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.btn-already-sent {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--cream-40);
+  background: transparent;
+  border: 1px solid var(--cream-12);
+  border-radius: 999px;
+  padding: 5px 12px;
+  height: auto;
+  flex: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 120ms var(--ease-interactive), border-color 120ms var(--ease-interactive);
+}
+.btn-already-sent:hover { color: var(--cream-75); border-color: var(--cream-40); }
+.btn-already-sent:active { transform: scale(0.97); }
+.btn-already-sent.marked { color: var(--lime); border-color: rgba(148,224,115,0.35); pointer-events: none; }
 </style>
 <script>
 const STORAGE_PREFIX = 'bloom_review_edits_v1';
@@ -77,14 +96,20 @@ function render() {
 
   if (!pending.length) {
     const sent = queue.filter(q => q.status === 'sent').length;
+    const alreadySent = queue.filter(q => q.status === 'already_sent').length;
     const held = queue.filter(q => q.status === 'held').length;
+    const sentStatBoxes = alreadySent > 0
+      ? `<div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>
+         <div class="stat-box"><div class="stat-num">${alreadySent}</div><div class="stat-label">Already sent</div></div>
+         <div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>`
+      : `<div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>
+         <div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>`;
     wrap.innerHTML = `
       <div class="done-screen">
         <p class="big">All done for today</p>
         <p>${queue.length} drafts reviewed. Next batch lands tomorrow at 9am.</p>
         <div class="stat-row">
-          <div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>
-          <div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>
+          ${sentStatBoxes}
         </div>
         <button class="btn-more" id="moreBtn" onclick="goForMore()">Go for more ↗</button>
         <div class="more-status" id="moreStatus" style="display:none;"></div>
@@ -99,7 +124,10 @@ function render() {
   const subjectVal = edit.subject || item.subject;
   wrap.innerHTML = `
     <div class="card" id="activeCard">
-      <span class="pill step${item.step}">${STEP_LABELS[item.step]}</span>
+      <div class="card-header">
+        <span class="pill step${item.step}">${STEP_LABELS[item.step]}</span>
+        <button class="btn-already-sent" id="alreadySentBtn" onclick="alreadySentCurrent('${jsStr(item.id)}')" title="Already sent this one earlier today? Mark it done without sending again.">Already sent today</button>
+      </div>
       <p class="company">${item.company}</p>
       <p class="contact-line">${item.contact}</p>
       <div class="to-subject">
@@ -147,6 +175,17 @@ async function holdCurrent(id) {
   const item = queue.find(q => q.id === id);
   if (item) item.status = 'held';
   render();
+}
+
+async function alreadySentCurrent(id) {
+  const btn = document.getElementById('alreadySentBtn');
+  if (btn) { btn.textContent = 'Marked ✓'; btn.classList.add('marked'); }
+  try {
+    await fetch(`/api/items/${id}/already-sent`, { method: 'POST' });
+  } catch (e) { console.error('already-sent failed', e); }
+  const item = queue.find(q => q.id === id);
+  if (item) item.status = 'already_sent';
+  setTimeout(render, 350);
 }
 
 function showSendError(msg) {

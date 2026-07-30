@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const apollo = require('./lib/apollo');
 const store = require('./lib/store');
@@ -171,7 +172,76 @@ app.post('/api/research-more', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Bloom outbound app listening on port ${PORT}`);
-  console.log(`Apollo configured: ${apollo.isConfigured()}`);
+// Self-heal for public/index.html.
+//
+// index.html's static head is ~300KB of embedded base64 @font-face data. That's
+// too large to safely push through any text-generating tool call — on
+// 2026-07-30 an attempt to hand-edit index.html through the GitHub Contents API
+// silently corrupted/stripped the font (verified: an LLM cannot reliably
+// retype ~90k tokens of dense base64 without transcription errors, and
+// GitHub's Contents API has no "edit in place" or blob-reuse option exposed
+// to us — every update requires resending the full file as text). The same
+// "index.html fix blocked by file size" problem was already hit once before,
+// on 2026-07-28 (see git log), and worked around by avoiding the file instead
+// of fixing the real issue.
+//
+// Rather than ever hand-editing that blob again, we rebuild it here at boot,
+// every time: fetch a known-good historical commit of index.html (still has
+// the original font, just the OLD interactive script) straight from GitHub's
+// raw content API, keep everything up to the start of the interactive
+// <style>/<script> block, and append the CURRENT public/app-script.html
+// (small, safe to hand-edit normally, and always kept up to date) in its
+// place. This runs on every boot and is a no-op once index.html already has
+// both the font and the latest interactive block, so it's safe to leave in
+// permanently.
+const OLD_FONT_INTACT_SHA = '93b31affe9f9c82271db6f35ef97168d61ee3f44';
+const OLD_FONT_INTACT_URL = `https://raw.githubusercontent.com/joebroome-oss/Bloom-Outbound-App/${OLD_FONT_INTACT_SHA}/public/index.html`;
+
+async function ensureIndexHtmlHealthy() {
+  const indexPath = path.join(__dirname, 'public', 'index.html');
+  const scriptPath = path.join(__dirname, 'public', 'app-script.html');
+  try {
+    const current = fs.readFileSync(indexPath, 'utf8');
+    const hasFont = current.includes('@font-face');
+    const hasLatestButtons = current.includes('existing-deal') && current.includes('already-sent');
+    if (hasFont && hasLatestButtons) {
+      console.log('index.html already has font + latest interactive block — no rebuild needed.');
+      return;
+    }
+    console.log(`index.html unhealthy (font: ${hasFont}, latest buttons: ${hasLatestButtons}) — rebuilding...`);
+
+    const res = await fetch(OLD_FONT_INTACT_URL);
+    if (!res.ok) throw new Error(`Could not fetch known-good index.html (HTTP ${res.status})`);
+    const oldFull = await res.text();
+
+    const marker = '<style>\n.send-error { margin-top';
+    let idx = oldFull.indexOf(marker);
+    if (idx === -1) {
+      const first = oldFull.indexOf('<style>');
+      idx = oldFull.indexOf('<style>', first + 1);
+    }
+    if (idx === -1 || idx < 1000) {
+      throw new Error('Could not locate the interactive block boundary in the known-good file — leaving index.html as-is.');
+    }
+
+    const head = oldFull.slice(0, idx);
+    const tail = fs.readFileSync(scriptPath, 'utf8');
+    const rebuilt = head + tail;
+
+    if (!rebuilt.includes('@font-face') || rebuilt.length < 250000) {
+      throw new Error('Rebuilt index.html failed sanity checks — leaving existing file in place.');
+    }
+
+    fs.writeFileSync(indexPath, rebuilt);
+    console.log(`index.html rebuilt successfully (${rebuilt.length} bytes).`);
+  } catch (err) {
+    console.error('ensureIndexHtmlHealthy failed (leaving index.html as-is):', err.message);
+  }
+}
+
+ensureIndexHtmlHealthy().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Bloom outbound app listening on port ${PORT}`);
+    console.log(`Apollo configured: ${apollo.isConfigured()}`);
+  });
 });

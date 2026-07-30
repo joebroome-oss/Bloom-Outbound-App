@@ -10,7 +10,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .apollo-banner { margin: 10px 0 0; padding: 10px 14px; border-radius: 8px; background: rgba(240,200,90,0.12); border: 1px solid rgba(240,200,90,0.35); color: #f0d178; font-size: 13px; max-width: 520px; }
 .loading-state { text-align: center; padding: 60px 20px; color: var(--cream-55); font-size: 15px; }
 .card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.btn-already-sent {
+.card-header-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.btn-already-sent, .btn-existing-deal {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.02em;
@@ -28,6 +29,10 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-already-sent:hover { color: var(--cream-75); border-color: var(--cream-40); }
 .btn-already-sent:active { transform: scale(0.97); }
 .btn-already-sent.marked { color: var(--lime); border-color: rgba(148,224,115,0.35); pointer-events: none; }
+.btn-existing-deal { color: var(--coral); border-color: rgba(247,105,56,0.3); }
+.btn-existing-deal:hover { color: var(--coral); border-color: rgba(247,105,56,0.6); background: rgba(247,105,56,0.08); }
+.btn-existing-deal:active { transform: scale(0.97); }
+.btn-existing-deal.marked { color: var(--coral); border-color: rgba(247,105,56,0.5); background: rgba(247,105,56,0.1); pointer-events: none; }
 </style>
 <script>
 const STORAGE_PREFIX = 'bloom_review_edits_v1';
@@ -97,13 +102,13 @@ function render() {
   if (!pending.length) {
     const sent = queue.filter(q => q.status === 'sent').length;
     const alreadySent = queue.filter(q => q.status === 'already_sent').length;
+    const existingDeal = queue.filter(q => q.status === 'existing_deal').length;
     const held = queue.filter(q => q.status === 'held').length;
-    const sentStatBoxes = alreadySent > 0
-      ? `<div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>
-         <div class="stat-box"><div class="stat-num">${alreadySent}</div><div class="stat-label">Already sent</div></div>
-         <div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>`
-      : `<div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>
-         <div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>`;
+    const extraBoxes = [
+      alreadySent > 0 ? `<div class="stat-box"><div class="stat-num">${alreadySent}</div><div class="stat-label">Already sent</div></div>` : '',
+      existingDeal > 0 ? `<div class="stat-box"><div class="stat-num">${existingDeal}</div><div class="stat-label">Existing deal</div></div>` : '',
+    ].join('');
+    const sentStatBoxes = `<div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>${extraBoxes}<div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>`;
     wrap.innerHTML = `
       <div class="done-screen">
         <p class="big">All done for today</p>
@@ -126,7 +131,10 @@ function render() {
     <div class="card" id="activeCard">
       <div class="card-header">
         <span class="pill step${item.step}">${STEP_LABELS[item.step]}</span>
-        <button class="btn-already-sent" id="alreadySentBtn" onclick="alreadySentCurrent('${jsStr(item.id)}')" title="Already sent this one earlier today? Mark it done without sending again.">Already sent today</button>
+        <div class="card-header-actions">
+          <button class="btn-existing-deal" id="existingDealBtn" onclick="existingDealCurrent('${jsStr(item.id)}')" title="Already speaking to them elsewhere? Stop this sequence for good.">Existing deal</button>
+          <button class="btn-already-sent" id="alreadySentBtn" onclick="alreadySentCurrent('${jsStr(item.id)}')" title="This one's already been sent — mark it done without sending again.">Already sent</button>
+        </div>
       </div>
       <p class="company">${item.company}</p>
       <p class="contact-line">${item.contact}</p>
@@ -185,6 +193,41 @@ async function alreadySentCurrent(id) {
   } catch (e) { console.error('already-sent failed', e); }
   const item = queue.find(q => q.id === id);
   if (item) item.status = 'already_sent';
+  setTimeout(render, 350);
+}
+
+// Permanently stops the automated sequence for this contact (Joe is already
+// talking to them elsewhere) by adding them to a fixed Apollo list, via the
+// server route which resolves the contact by email and merges the list into
+// their existing Apollo list membership. Distinct from "already sent" — this
+// survives past today.
+async function existingDealCurrent(id) {
+  const item = queue.find(q => q.id === id);
+  if (!item) return;
+  const btn = document.getElementById('existingDealBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Flagging…'; }
+  try {
+    const res = await fetch(`/api/items/${id}/existing-deal`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to: item.to }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const box = document.getElementById('sendError');
+      if (box) { box.style.display = 'block'; box.textContent = data.message || 'Could not flag this contact — nothing was changed.'; }
+      if (btn) { btn.disabled = false; btn.textContent = 'Existing deal'; }
+      return;
+    }
+  } catch (e) {
+    console.error('existing-deal failed', e);
+    const box = document.getElementById('sendError');
+    if (box) { box.style.display = 'block'; box.textContent = 'Could not reach the server — nothing was flagged.'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Existing deal'; }
+    return;
+  }
+  if (btn) { btn.textContent = 'Flagged ✓'; btn.classList.add('marked'); }
+  item.status = 'existing_deal';
   setTimeout(render, 350);
 }
 

@@ -1,6 +1,612 @@
 <meta charset="UTF-8">
 <h2 class="sr-only">Bloom outbound review stack: swipe through today's queued emails, edit inline, then send or skip one at a time</h2>
 <style>
-@font-face {
-  font-family: 'Riforma LL Medium';
-  src: url(data:font/otf;base64,T1RUTwAMAIAAAwBAQ0ZGIK0uG8YAABrIAADpEkRTSUcAAAACAAHCDAAAAAhHUE9TU9jFKwABA9wAAJM2R1NVQo7Pg0gAAZcUAAAZ6k9TLzJMJGEsAAABMAAAAGBjbWFwvJIzbwAADcAAAAzmaGVhZBQngQYAAADMAAAANmhoZWEHXwe5AAABBAAAACRobXR4vftnGgABsQAAABEMbWF4cARDUAAAAAEoAAAABm5hbWVMyaTsAAABkAAADDBwb3N0/7MAKAAAGqgAAAAgAAEAAAAFAACOPC3hXw889QADA+gAAAAA0/LgtAAAAADdc1yU/kj+/AVeA94AAAAHAAIAAAAAAAAAAQAAA7b/BgAABbH+SP6+BV4AAQAAAAAAAAAAAAAAAAAABEMAAFAABEMAAAAEAl4B9AAFAAQCigJYAAAASwKKAlgAAAFeACgBOAAAAgsGBAEBAQEBBKAAAP9AAOD7AAAACAAAAABMTlRPAYAAAP//A7b/BgAAA6IBDiAAAJMAAAAAAggCvAAAACAACwAAACIBngABAAAAAAAAADsAAAABAAAAAAABABEAOwABAAAAAAACAAcATAABAAAAAAADAB8AUwABAAAAAAAEABEAOwABAAAAAAAFABkAcgABAAAAAAAGABAAiwABAAAAAAAHACAAmwABAAAAAAAIAAYAuwABAAAAAAAJAC4AwQABAAAAAAAKAIUA7wABAAAAAAALABYBdAABAAAAAAAMACQBigABAAAAAAANAawBrgABAAAAAAAOABwDWgABAAAAAAAQAAoDdgABAAAAAAARAAYDgAADAAEECQAAAHYDhgADAAEECQABACID/AADAAEECQACAA4EHgADAAEECQADAD4ELAADAAEECQAEACID/AADAAEECQAFADIEagADAAEECQAGACAEnAADAAEECQAHAEAEvAADAAEECQAIAAwE/AADAAEECQAJAFwFCAADAAEECQAKAQoFZAADAAEECQALACwGbgADAAEECQAMAEgGmgADAAEECQANA1gG4gADAAEECQAOADgKOgADAAEECQAQABQKcgADAAEECQARAAwKhqkgMjAxMS0yMDE3LCBDb3B5cmlnaHQgYnkgTGluZXRvIEdtYkguIEFsbCByaWdodHMgcmVzZXJ2ZWQuUmlmb3JtYSBMTCBNZWRpdW1SZWd1bGFyTGluZXRvOiBSaWZvcm1hIExMLU1lZGl1bTogMjAxNlZlcnNpb24gNS4wMDA7IGJ1aWxkIDAwMzBSaWZvcm1hTEwtTWVkaXVtUmlmb3JtYSBpcyBhIHRyYWRlbWFyayBvZiBMaW5ldG9MaW5ldG9OT1JNIChEaW1pdHJpIEJydW5pLCBNYW51ZWwgS3JlYnMpICgyMDExLTIwMTcpTEwgUmlmb3JtYSBpcyBkZXNpZ25lZCBieSBOT1JNIChEaW1pdHJpIEJydW5pLCBNYW51ZWwgS3JlYnMpLCByZWxlYXNlZCBieSBMaW5ldG8gaW4gMjAxOC4gRm9udCBlbmdpbmVlcmluZyBhbmQgbWFzdGVyaW5nIGJ5IEFscGhhYmV0Lmh0dHBzOi8vd3d3LmxpbmV0by5jb21odHRwczovL3d3dy5saW5ldG8uY29tL1RoZStEZXNpZ25lcnNObyB1c2Ugb2YgdGhpcyBmb250IGlzIGFsbG93ZWQgd2l0aG91dCBMaW5ldG8ncyBjb25zZW50IGFuZCB3aXRob3V0IHRoZSB1c2VyJ3MgY29tcGxpYW5jZSB3aXRoIHRoZSBMaW5ldG8gRVVMQSBhbmQgdGhlIFNVTC4gTGF3ZnVsIHVzZSBvZiB0aGUgZm9udHMgb3IgdGhlIGRhdGEgY29udGFpbmVkIHdpdGhpbiB0aGUgZm9udCBmaWxlcyBleGNsdWRlcyBtb2RpZnlpbmcsIHJlYXNzZW1ibGluZywgcmVuYW1pbmcsIHN0b3Jpbmcgb24gcHVibGljbHkgYXZhaWxhYmxlIHNlcnZlcnMsIHJlZGlzdHJpYnV0aW5nIGFuZCBzZWxsaW5nLiBBbnkgdW5sYXdmdWwgdXNlIG9mIHRoaXMgdHlwb2dyYXBoaWMgc29mdHdhcmUgd2lsbCBiZSBwcm9zZWN1dGVkLiBGb3IgYWRkaXRpb25hbCBpbmZvcm1hdGlvbiBzZWUgaHR0cHM6Ly9saW5ldG8uY29tL2xpY2Vuc2luZ2h0dHBzOi8vbGluZXRvLmNvbS9saWNlbnNpbmdSaWZvcm1hIExMTWVkaXVtAKkAIAAyADAAMQAxAC0AMgAwADEANwAsACAAQwBvAHAAeQByAGkAZwBoAHQAIABiAHkAIABMAGkAbgBlAHQAbwAgAEcAbQBiAEgALgAgAEEAbABsACAAcgBpAGcAaAB0AHMAIAByAGUAcwBlAHIAdgBlAGQALgBSAGkAZgBvAHIAbQBhACAATABMACAATQBlAGQAaQB1AG0AUgBlAGcAdQBsAGEAcgBMAGkAbgBlAHQAbwA6ACAAUgBpAGYAbwByAG0AYQAgAEwATAAtAE0AZQBkAGkAdQBtADoAIAAyADAAMQA2AFYAZQByAHMAaQBvAG4AIAA1AC4AMAAwADAAOwAgAGIAdQBpAGwAZAAgADAAMAAzADAAUgBpAGYAbwByAG0AYQBMAEwALQBNAGUAZABpAHUAbQBSAGkAZgBvAHIAbQBhACAAaQBzACAAYQAgAHQAcgBhAGQAZQBtAGEAcgBrACAAbwBmACAATABpAG4AZQB0AG8ATABpAG4AZQB0AG8ATgBPAFIATQAgACgARABpAG0AaQB0AHIAaQAgAEIAcgB1AG4AaQAsACAATQBhAG4AdQBlAGwAIABLAHIAZQBiAHMAKQAgACgAMgAwADEAMQAtADIAMAAxADcAKQBMAEwAIABSAGkAZgBvAHIAbQBhACAAaQBzACAAZABlAHMAaQBnAG4AZQBkACAAYgB5ACAATgBPAFIATQAgACgARABpAG0AaQB0AHIAaQAgAEIAcgB1AG4AaQAsACAATQBhAG4AdQBlAGwAIABLAHIAZQBiAHMAKQAsACAAcgBlAGwAZQBhAHMAZQBkACAAYgB5ACAATABpAG4AZQB0AG8AIABpAG4AIAAyADAAMQA4AC4AIABGAG8AbgB0ACAAZQBuAGcAaQBuAGUAZQByAGkAbgBnACAAYQBuAGQAIABtAGEAcwB0AGUAcgBpAG4AZwAgAGIAeQAgAEEAbABwAGgAYQBiAGUAdAAuAGgAdAB0AHAAcwA6AC8ALwB3AHcAdwAuAGwAaQBuAGUAdABvAC4AYwBvAG0AaAB0AHQAcABzADoALwAvAHcAdwB3AC4AbABpAG4AZQB0AG8ALgBjAG8AbQAvAFQAaABlACsARABlAHMAaQBnAG4AZQByAHMATgBvACAAdQBzAGUAIABvAGYAIAB0AGgAaQBzACAAZgBvAG4AdAAgAGkAcwAgAGEAbABsAG8AdwBlAGQAIAB3AGkAdABoAG8AdQB0ACAATABpAG4AZQB0AG8AJwBzACAAYwBvAG4AcwBlAG4AdAAgAGEAbgBkACAAdwBpAHQAaABvAHUAdAAgAHQAaABlACAAdQBzAGUAcgAnAHMAIABjAG8AbQBwAGwAaQBhAG4AYwBlACAAdwBpAHQAaAAgAHQAaABlACAATABpAG4AZQB0AG8AIABFAFUATABBACAAYQBuAGQAIAB0AGgAZQAgAFMAVQBMAC4AIABMAGEAdwBmAHUAbAAgAHUAcwBlACAAbwBmACAAdABoAGUAIABmAG8AbgB0AHMAIABvAHIAIAB0AGgAZQAgAGQAYQB0AGEAIABjAG8AbgB0AGEAaQBuAGUAZAAgAHcAaQB0AGgAaQBuACAAdABoAGUAIABmAG8AbgB0ACAAZgBpAGwAZQBzACAAZQB4AGMAbAB1AGQAZQBzACAAbQBvAGQAaQBmAHkAaQBuAGcALAAgAHIAZQBhAHMAcwBlAG0AYgBsAGkAbgBnACwAIAByAGUAbgBhAG0AaQBuAGcALAAgAHMAdABvAHIAaQBuAGcAIABvAG4AIABwAHUAYgBsAGkAYwBsAHkAIABhAHYAYQBpAGwAYQBiAGwAZQAgAHMAZQByAHYAZQByAHMALAAgAHIAZQBkAGkAcwB0AHIAaQBiAHUAdABpAG4AZwAgAGEAbgBkACAAcwBlAGwAbABpAG4AZwAuACAAQQBuAHkAIAB1AG4AbABhAHcAZgB1AGwAIAB1AHMAZQAgAG8AZgAgAHQAaABpAHMAIAB0AHkAcABvAGcAcgBhAHAAaABpAGMAIABzAG8AZgB0AHcAYQByAGUAIAB3AGkAbABsACAAYgBlACAAcAByAG8AcwBlAGMAdQB0AGUAZAAuACAARgBvAHIAIABhAGQAZABpAHQAaQBvAG4AYQBsACAAaQBuAGYAbwByAG0AYQB0AGkAbwBuACAAcwBlAGUAIABoAHQAdABwAHMAOgAvAC8AbABpAG4AZQB0AG8ALgBjAG8AbQAvAGwAaQBjAGUAbgBzAGkAbgBnAGgAdAB0AHAAcwA6AC8ALwBsAGkAbgBlAHQAbwAuAGMAbwBtAC8AbABpAGMAZQBuAHMAaQBuAGcAUgBpAGYAbwByAG0AYQAgAEwATABNAGUAZABpAHUAbQAAAAQAAAADAAAAJAABAAAAAARsAAMAAQAAACQAAwAKAAAGdgAEBEgAAAEMAQAABwAMAAAADQB+AX8BkAGSAZQBlwGdAbYB1AHrAf8CGwIf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AAi8AAAFmAAACMgAAAjMAAAFoAAACNwAAAjcAAAFqAAACRAAAAkQAAAFrAAACWQAAAlkAAAFsAAACWwAAAlsAAAFtAAACYwAAAmMAAAFuAAACaAAAAmgAAAFvAAACcgAAAnIAAAFwAAACiQAAAokAAAFxAAACxgAAAscAAAFyAAAC2AAAAt0AAAF0AAADAAAAAwQAAAF6AAADBgAAAwgAAAF/AAADCgAAAwwAAAGCAAADEgAAAxMAAAGFAAADIwAAAyMAAAGHAAADJgAAAygAAAGIAAADLgAAAy4AAAGLAAADMQAAAzEAAAGMAAADhwAAA4cAAAGNAAADlAAAA5QAAAGOAAADqQAAA6kAAAGPAAADvAAAA7wAAAGQAAADwAAAA8AAAAGRAAAeAgAAHgMAAAGSAAAeCgAAHhEAAAGUAAAeHgAAHiUAAAGcAAAeKgAAHisAAAGkAAAeNgAAHjsAAAGmAAAePgAAHkkAAAGsAAAeVgAAHlcAAAG4AAAeWgAAHmMAAAG6AAAeagAAHm8AAAHEAAAefAAAHn0AAAHKAAAegAAAHoUAAAHMAAAeigAAHosAAAHSAAAekgAAHpMAAAHUAAAelwAAHpcAAAHWAAAengAAHp4AAAHXAAAeoAAAHqEAAAHYAAAeuAAAHrkAAAHaAAAevAAAHr0AAAHcAAAeygAAHs0AAAHeAAAe5AAAHuUAAAHiAAAe8gAAHvMAAAHkAAAe+AAAHvkAAAHmAAAgAAAAIAsAAAHoAAAgEgAAIBUAAAH0AAAgGAAAICIAAAH4AAAgJgAAICYAAAIDAAAgMAAAIDAAAAIEAAAgMgAAIDMAAAIFAAAgOQAAIDoAAAIHAAAgPQAAID0AAAIJAAAgRAAAIEQAAAIKAAAgcAAAIHAAAAILAAAgdAAAIHkAAAIMAAAggAAAIIkAAAISAAAgoQAAIKEAAAIcAAAgpgAAIKYAAAIdAAAgrAAAIKwAAAIeAAAgsgAAILIAAAIfAAAgtQAAILUAAAIgAAAgugAAILoAAAIhAAAgvwAAIL8AAAIiAAAhEwAAIRMAAAIjAAAhFwAAIRcAAAIkAAAhIgAAISIAAAIlAAAhJgAAISYAAAImAAAhLgAAIS4AAAInAAAhUAAAIX8AAAIoAAAhiQAAIYkAAAJYAAAhkAAAIZMAAAJZAAAhlgAAIZkAAAJdAAAhpQAAIaUAAAJhAAAhqQAAIaoAAAJiAAAiAgAAIgIAAAJkAAAiBgAAIgYAAAJlAAAiDwAAIg8AAAJmAAAiEQAAIhIAAAJnAAAiFQAAIhUAAAJpAAAiGQAAIhoAAAJqAAAiHgAAIh4AAAJsAAAiKwAAIisAAAJtAAAiSAAAIkgAAAJuAAAiYAAAImEAAAJvAAAiZAAAImUAAAJxAAAilQAAIpgAAAJzAAAioAAAIqAAAAJ3AAAjAAAAIwAAAAJ4AAAjzwAAI88AAAJ5AAAj6QAAI+4AAAJ6AAAj+AAAI/oAAAKAAAAloAAAJaEAAAKDAAAlrwAAJa8AAAKFAAAlsgAAJbMAAAKGAAAltgAAJbYAAAKJAAAltwAAJbcAAAKIAAAlvAAAJb0AAAKKAAAlwAAAJcAAAAKNAAAlwQAAJcEAAAKMAAAlxgAAJccAAAKOAAAlygAAJcwAAAKQAAAlzwAAJdUAAAKTAAAl5wAAJeoAAAKaAAAmEAAAJhIAAAKeAAAmMAAAJjcAAAKhAAAmkAAAJpEAAAKpAAAnEwAAJxMAAAKrAAAnMwAAJzMAAAKsAAAngAAAJ4gAAAKtAAAnigAAJ5IAAAK2AAApEwAAKRMAAAK/AAAptgAAKbYAAALAAAApuAAAKbgAAALBAAApvwAAKb8AAALCAAArEgAAKxoAAALDAAD7AAAA+wQAAALMAAD+/wAA/v8AAALRAAHzEAAB8xAAAALSAAAAAwAAAAAAAP+wACgAAAAAAAAAAAAAAAAAAAAAAAAAAAEABAIAAQEBEVJpZm9ybWFMTC1NZWRpdW0AAQEBQvgQAB0AAATdAR0AAATeDAAdAAAE3wIdAAAE3wP4GASzDAT8TPuYHQAABV76cgUdAAA7gA/KHQAA0toSHQAAPb0RA1kCAAEABgANABQAGwAiACkALwA1ADwAQwBJAE8AWgBlAG8AeQB/AIUAiwCRAJcAnQCkAKsAsQC3AMEAywDSANkA3wDlAPAA+wEBAQcBEQEbASIBKQE0AT8BQwFHAU0BUwFaAWEBZwFtAXQBewGFAYcBiQGUAZ8BpgGtAbkBvwHFAcwB0wHZAd8B4wHnAe0B8wH6AgECBwINAhgCGwIeAiUCLAIyAjgCRQJSAlgCXgJlAmwCcgJ4An4ChAKPApoCogKqArECuAK+AsQCyALMAtIC2ALfAuYC7ALyAvcC/AMJAxYDHQMkAy8DOgNFA1ADVgNcA2YDcAN1A3wDgwOKA5EDmAOfA6YDrQO0A7sDwgPJA9AD1wPeA+QD6gPxA/gD/wQGBA0EFAQeBCgELwQ2BEEETARTBFoEYQRoBG8EdgR9BIQEiwSSBJkEoASnBK4EtQS8BMMEygTTBNwE4wTsBPME+gUBBQgFDwUWBR0FJAUrBTcFPgVFBUwFUwVaBWMFagVxBXgFegWBBYgFjwWWBZ0FpAWrBbIFuQXABccFzgXVBdwF4wXqBfEF+AX/BgYGDQYUBhsGIgYpBjAGNwY+BkUGTAZTBloGYQZoBm8GdgZ9BoQGiwaSBpkGoAanBq4GtQa8BsMGygbRBtgG3wbmBu0G9Ab7BwIHCQcQBxYHHAciBygHMQc6B0EHSAdPB1YHXQdkB2sHcgd5B4AHhweOB5UHnAejB6oHsQe4B74HxAfLB9IH2QfgB+cH7gf1B/wIAwgKCBEIGAgfCCYILQg6CEEIRwhNCFQIWwhiCGkIcAh3CH4IhQiMCJMImgihCKgIrwi2CL0IxAjLCNII1gjdCOQI6wjyCPkJAAkFCQ4JFQkcCSMJKgkxCTgJPwlGCU0JVAlbCWIJaQlwCXcJfgmFCYwJkwmaCaEJqAmvCbYJvQnECcsJ0gnZCeAJ5wnuCfUJ/AoDCgoKEQoYCh8KJgotCjQKOwpECksKVQpeCmUKbApzCnoKgQqICo8KmgqfCqYKrwq2Cr0KxArMCtQK3wrnCvIK+wsHCw4LFQscCyMLKgsxCzgLPwtGC00LVAtbC2ILaQtwC3cLfguFC4wLkwuaC6ELqAuvC7YLvQvEC8sL0gvZC+AL5wvuC/UL/AwDDAoMEQwYDB8MJgwtDDQMOwxCDEkMUAxXDF4MZQxsDHMMegyBDIgMjwyWDJ0MpAyrDLIMuQzADMcMzgzVDNwM4wzqDPEM+Az/DQYNDQ0UDRsNIg0pDTANNw0+DUUNTA1TDVoNYQ1oDW8Ndg19DYQNiw2SDZgNog2vDbwNxQ3NDdUN3w3oDfEN+Q4DDg0OFg4fDicOLw45DkIOSw5TDl0OZw5wDnoOhw6QDpoOoQ6oDq4OtA68DsMOyg7QDtgO4A7nDu4O9g8ADw4PGw8iDy0POA8+D0gPVQ9eD2oPdQ9+D4cPkQ+fD6YPrg+8D8cP0w/iD+sP9hABEAwQFxAiEC0QOBBDEE4QWRBkEG8QehCFEJAQmxCmELEQvBDHENIQ4BDvEPoRARERESIRMRE/EUcRVhFlEW4RfBGOEZoRrRHAEdER3xHtEfkSBxITEh8SKxI3EkMSTxJbEmwSeBKEEpASnBKoErMSvhLJEtsS7hL8EwgTFxMlEzETPRNJE1UTYRNtE3kThRORE50TqRO1E8ETzRPZE+UT8RP9FAkUFRQhFC0UORRFFFEUXRRpFHUUgRSNFJkUpRSxFL0UyRTVFOEU7RT5FQUVERUdFSkVNRVBFU0VWRVlFXEVfRWJFZUVoRWtFbkVxRXRFd0V6RX1FgEWDRYZFiUWMRY9FkkWVRZhFm0WeRaCFo4WlhagFqoWsha6FsIWyxbSFtgW3hbkFuoW8Bb2FvwXChcZFyYXNRdAF04XXhdpF3gXhBeLF5IXoheyF7oXwhfNF9kX5BfwF/sYBBgUGB4YKRg1GEAYTBhYGGQYcBh8GIgYlBigGKwYuBjEGNAY3BjoGPMY/xkLGRcZIxkvGTsZRxlTGV8Zbxl7GYcZkxmaGaEZrRm5GccZ1RnhGfEZ/xoLGh4aMho9GkgaVhplGm8afxqNGp4arRq7GsMa0hrgGusa9hsJGx0bMhtIG1wbbxt8G5AboxuzG8Mb1hvqHAIcGxwqHDgcRxxRHFocYhxqHHQcfRyGHI4cmByiHKscuxzMHNoc6Rz0HP8dDR0bHS4dQh1IHUsdUB1VHVgdWx1hHWcdbR1zHXkdfx2FHYsdkR2XHZ0dox2pHa8dtR27HcEdxx3NHdMd2R3fHeUd6x3uHnMerR6+Lm51bGx1bmkwMDBEdW5pMDBBMHVuaTAwQURBbWFjcm9uYW1hY3JvbkFicmV2ZWFicmV2ZUFvZ29uZWthb2dvbmVrQ2FjdXRlY2FjdXRlQ2NpcmN1bWZsZXhjY2lyY3VtZmxleENkb3RhY2NlbnRjZG90YWNjZW50Q2Nhcm9uY2Nhcm9uRGNhcm9uZGNhcm9uRGNyb2F0ZGNyb2F0RW1hY3JvbmVtYWNyb25FYnJldmVlYnJldmVFZG90YWNjZW50ZWRvdGFjY2VudEVvZ29uZWtlb2dvbmVrRWNhcm9uZWNhcm9uR2NpcmN1bWZsZXhnY2lyY3VtZmxleEdicmV2ZWdicmV2ZUdkb3RhY2NlbnRnZG90YWNjZW50dW5pMDEyMnVuaTAxMjNIY2lyY3VtZmxleGhjaXJjdW1mbGV4SGJhcmhiYXJJdGlsZGVpdGlsZGVJbWFjcm9uaW1hY3JvbklicmV2ZWlicmV2ZUlvZ29uZWtpb2dvbmVrSWRvdGFjY2VudElKaWpKY2lyY3VtZmxleGpjaXJjdW1mbGV4dW5pMDEzNnVuaTAxMzdrZ3JlZW5sYW5kaWNMYWN1dGVsYWN1dGV1bmkwMTNCdW5pMDEzQ0xjYXJvbmxjYXJvbkxkb3RsZG90TmFjdXRlbmFjdXRldW5pMDE0NXVuaTAxNDZOY2Fyb25uY2Fyb25uYXBvc3Ryb3BoZUVuZ2VuZ09tYWNyb25vbWFjcm9uT2JyZXZlb2JyZXZlT2h1bmdhcnVtbGF1dG9odW5nYXJ1bWxhdXRSYWN1dGVyYWN1dGV1bmkwMTU2dW5pMDE1N1JjYXJvbnJjYXJvblNhY3V0ZXNhY3V0ZVNjaXJjdW1mbGV4c2NpcmN1bWZsZXhTY2VkaWxsYXNjZWRpbGxhdW5pMDE2MnVuaTAxNjNUY2Fyb250Y2Fyb25UYmFydGJhclV0aWxkZXV0aWxkZVVtYWNyb251bWFjcm9uVWJyZXZldWJyZXZlVXJpbmd1cmluZ1VodW5nYXJ1bWxhdXR1aHVuZ2FydW1sYXV0VW9nb25la3VvZ29uZWtXY2lyY3VtZmxleHdjaXJjdW1mbGV4WWNpcmN1bWZsZXh5Y2lyY3VtZmxleFphY3V0ZXphY3V0ZVpkb3RhY2NlbnR6ZG90YWNjZW50bG9uZ3N1bmkwMThGdW5pMDE5MHVuaTAxOTR1bmkwMTk3dW5pMDE5RHVuaTAxQjV1bmkwMUI2dW5pMDFDRHVuaTAxQ0V1bmkwMUNGdW5pMDFEMHVuaTAxRDF1bmkwMUQydW5pMDFEM3VuaTAxRDRHY2Fyb25nY2Fyb251bmkwMUU4dW5pMDFFOXVuaTAxRUF1bmkwMUVCdW5pMDFGOHVuaTAxRjlBcmluZ2FjdXRlYXJpbmdhY3V0ZUFFYWN1dGVhZWFjdXRlT3NsYXNoYWN1dGVvc2xhc2hhY3V0ZXVuaTAyMTh1bmkwMjE5dW5pMDIxQXVuaTAyMUJ1bmkwMjFFdW5pMDIxRnVuaTAyMkV1bmkwMjJGdW5pMDIzMnVuaTAyMzN1bmkwMjM3dW5pMDI0NHVuaTAyNTl1bmkwMjVCdW5pMDI2M3VuaTAyNjh1bmkwMjcydW5pMDI4OWdyYXZlY29tYmFjdXRlY29tYnVuaTAzMDJ0aWxkZWNvbWJ1bmkwMzA0dW5pMDMwNnVuaTAzMDd1bmkwMzA4dW5pMDMwQXVuaTAzMEJ1bmkwMzBDdW5pMDMxMnVuaTAzMTNkb3RiZWxvd2NvbWJ1bmkwMzI2dW5pMDMyN3VuaTAzMjh1bmkwMzJFdW5pMDMzMWFub3RlbGVpYXVuaTAzOTR1bmkwM0E5dW5pMDNCQ3BpdW5pMUUwMnVuaTFFMDN1bmkxRTBBdW5pMUUwQnVuaTFFMEN1bmkxRTBEdW5pMUUwRXVuaTFFMEZ1bmkxRTEwdW5pMUUxMXVuaTFFMUV1bmkxRTFGdW5pMUUyMHVuaTFFMjF1bmkxRTIydW5pMUUyM3VuaTFFMjR1bmkxRTI1dW5pMUUyQXVuaTFFMkJ1bmkxRTM2dW5pMUUzN3VuaTFFMzh1bmkxRTM5dW5pMUUzQXVuaTFFM0J1bmkxRTNFdW5pMUUzRnVuaTFFNDB1bmkxRTQxdW5pMUU0MnVuaTFFNDN1bmkxRTQ0dW5pMUU0NXVuaTFFNDZ1bmkxRTQ3dW5pMUU0OHVuaTFFNDl1bmkxRTU2dW5pMUU1N3VuaTFFNUF1bmkxRTVCdW5pMUU1Q3VuaTFFNUR1bmkxRTVFdW5pMUU1RnVuaTFFNjB1bmkxRTYxdW5pMUU2MnVuaTFFNjN1bmkxRTZBdW5pMUU2QnVuaTFFNkN1bmkxRTZEdW5pMUU2RXVuaTFFNkZ1bmkxRTdDdW5pMUU3RFdncmF2ZXdncmF2ZVdhY3V0ZXdhY3V0ZVdkaWVyZXNpc3dkaWVyZXNpc3VuaTFFOEF1bmkxRThCdW5pMUU5MnVuaTFFOTN1bmkxRTk3dW5pMUU5RXVuaTFFQTB1bmkxRUExdW5pMUVCOHVuaTFFQjl1bmkxRUJDdW5pMUVCRHVuaTFFQ0F1bmkxRUNCdW5pMUVDQ3VuaTFFQ0R1bmkxRUU0dW5pMUVFNVlncmF2ZXlncmF2ZXVuaTFFRjh1bmkxRUY5dW5pMjAwMHVuaTIwMDF1bmkyMDAydW5pMjAwM3VuaTIwMDR1bmkyMDA1dW5pMjAwNnVuaTIwMDd1bmkyMDA4dW5pMjAwOXVuaTIwMEF1bmkyMDBCdW5pMjAxNXF1b3RlcmV2ZXJzZWR1bmkyMDFGbWludXRlc2Vjb25kdW5pMjAzRHVuaTIwNzB1bmkyMDc0dW5pMjA3NXVuaTIwNzZ1bmkyMDc3dW5pMjA3OHVuaTIwNzl1bmkyMDgwdW5pMjA4MXVuaTIwODJ1bmkyMDgzdW5pMjA4NHVuaTIwODV1bmkyMDg2dW5pMjA4N3VuaTIwODh1bmkyMDg5dW5pMjBBNkV1cm91bmkyMEIydW5pMjBCNXVuaTIwQkF1bmkyMEJGdW5pMjExM3VuaTIxMTdPbWVnYWVzdGltYXRlZHVuaTIxNTB1bmkyMTUxdW5pMjE1MnVuaTIxNTV1bmkyMTU2dW5pMjE1N3VuaTIxNTh1bmkyMTU5dW5pMjE1QXVuaTIxNUZ1bmkyMTYwdW5pMjE2MXVuaTIxNjJ1bmkyMTYzdW5pMjE2NHVuaTIxNjV1bmkyMTY2dW5pMjE2N3VuaTIxNjh1bmkyMTY5dW5pMjE2QXVuaTIxNkJ1bmkyMTZDdW5pMjE2RHVuaTIxNkV1bmkyMTZGdW5pMjE3MHVuaTIxNzF1bmkyMTcydW5pMjE3M3VuaTIxNzR1bmkyMTc1dW5pMjE3NnVuaTIxNzd1bmkyMTc4dW5pMjE3OXVuaTIxN0F1bmkyMTdCdW5pMjE3Q3VuaTIxN0R1bmkyMTdFdW5pMjE3RnVuaTIxODlhcnJvd2xlZnRhcnJvd3VwYXJyb3dyaWdodGFycm93ZG93bnVuaTIxOTZ1bmkyMTk3dW5pMjE5OHVuaTIxOTl1bmkyMUE1dW5pMjFBOXVuaTIxQUFwYXJ0aWFsZGlmZkRlbHRhcHJvZHVjdHN1bW1hdGlvbnVuaTIyMTV1bmkyMjE5cmFkaWNhbGluZmluaXR5aW50ZWdyYWxhcHByb3hlcXVhbG5vdGVxdWFsZXF1aXZhbGVuY2VsZXNzZXF1YWxncmVhdGVyZXF1YWx1bmkyMjk1dW5pMjI5NnVuaTIyOTd1bmkyMjk4dW5pMjJBMHVuaTIzMDB1bmkyM0NGdW5pMjNFOXVuaTIzRUF1bmkyM0VCdW5pMjNFQ3VuaTIzRUR1bmkyM0VFdW5pMjNGOHVuaTIzRjl1bmkyM0ZBdW5pMjVBMHVuaTI1QTF1bmkyNUFGdW5pMjVCMnVuaTI1QjN1bmkyNUI3dW5pMjVCNnVuaTI1QkN1bmkyNUJEdW5pMjVDMXVuaTI1QzB1bmkyNUM2dW5pMjVDN2xvemVuZ2V1bmkyNUNCdW5pMjVDQ3VuaTI1Q0Z1bmkyNUQwdW5pMjVEMXVuaTI1RDJ1bmkyNUQzdW5pMjVENHVuaTI1RDV1bmkyNUU3dW5pMjVFOHVuaTI1RTl1bmkyNUVBdW5pMjYxMHVuaTI2MTF1bmkyNjEy
+:root {
+  --bg:        #1a1a1a;
+  --bg2:       #22252b;
+  --cream:     #ebe8d9;
+  --cream-75:  rgba(235, 232, 217, 0.75);
+  --cream-55:  rgba(235, 232, 217, 0.55);
+  --cream-40:  rgba(235, 232, 217, 0.40);
+  --cream-12:  rgba(235, 232, 217, 0.12);
+  --cream-08:  rgba(235, 232, 217, 0.06);
+  --muted:     #6f7179;
+  --lime:      #94e073;
+  --coral:     #f76938;
+  --yellow:    #ffd62b;
+  --lavender:  #c7adf0;
+  --magenta:   #e32eed;
+  --pad-s: 24px; --pad-m: 32px; --pad-l: 40px;
+  --radius-s: 16px; --radius-m: 32px; --radius-l: 48px;
+  --font-display: 'Riforma LL Medium', Inter, sans-serif;
+  --font-body: 'Riforma LL Regular', Inter, -apple-system, sans-serif;
+  --font-mono: 'Akkurat Mono LL Regular', 'Fragment Mono', monospace;
+  --ease-entrance: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-interactive: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+.stage {
+  background: var(--bg);
+  min-height: 640px;
+  padding: 40px 20px 60px;
+  font-family: var(--font-body);
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.topbar {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.logo { height: 22px; }
+.date-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: var(--cream-08);
+  border: 1px solid rgba(235, 232, 217, 0.08);
+  color: var(--cream-55);
+}
+.progress-row {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.progress-seg {
+  flex: 1;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--cream-12);
+  overflow: hidden;
+}
+.progress-seg.done { background: var(--lime); }
+.progress-seg.current { background: var(--lavender); }
+
+.card-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  min-height: 420px;
+}
+.card {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  border-radius: var(--radius-m);
+  padding: var(--pad-m);
+  width: 100%;
+}
+.pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: var(--cream-08);
+  border: 1px solid rgba(199, 173, 240, 0.25);
+  color: var(--lavender);
+  margin-bottom: 16px;
+}
+.pill.step0 { color: var(--lime); border-color: rgba(148,224,115,0.25); }
+.pill.step1 { color: var(--yellow); border-color: rgba(255,214,43,0.25); }
+.pill.step2 { color: var(--coral); border-color: rgba(247,105,56,0.25); }
+.pill.step3 { color: var(--lavender); border-color: rgba(199,173,240,0.25); }
+.pill.step4 { color: var(--magenta); border-color: rgba(227,46,237,0.25); }
+
+.company {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  margin: 0 0 2px;
+}
+.contact-line {
+  color: var(--cream-55);
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+.field-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream-40);
+  margin-bottom: 4px;
+}
+.to-subject {
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--cream-75);
+}
+.to-subject b { color: var(--cream); font-family: var(--font-display); font-weight: 500; }
+.subject-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--cream-75);
+  font-family: var(--font-body);
+  font-size: 14px;
+  width: 100%;
+  padding: 0;
+}
+.subject-input:focus { color: var(--cream); }
+.editing .subject-input { border-bottom: 1px dashed var(--cream-12); padding-bottom: 2px; }
+.body-box {
+  width: 100%;
+  min-height: 200px;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: vertical;
+  color: var(--cream-75);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  padding: 0;
+}
+.body-box:focus { color: var(--cream); }
+.editing-flag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--yellow);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: none;
+}
+.editing .editing-flag { display: block; }
+
+.actions {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+button {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-size: 15px;
+  line-height: 110%;
+  padding: 14px 18px;
+  border-radius: var(--radius-s);
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  transition: transform 120ms var(--ease-interactive), opacity 120ms;
+}
+button:active { transform: scale(0.97); }
+.btn-skip {
+  background: transparent;
+  color: var(--cream-75);
+  border: 1px solid var(--cream-12);
+}
+.btn-edit {
+  background: transparent;
+  color: var(--lavender);
+  border: 1px solid rgba(199,173,240,0.35);
+  flex: 0.8;
+}
+.btn-send {
+  background: var(--cream);
+  color: var(--bg);
+  flex: 1.4;
+}
+.btn-send.sending { opacity: 0.6; pointer-events: none; }
+
+.done-screen {
+  text-align: center;
+  padding: 60px 20px;
+  width: 100%;
+  max-width: 520px;
+}
+.done-screen .big {
+  font-family: var(--font-display);
+  font-size: 40px;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+  background: linear-gradient(90deg, var(--cream) 0%, var(--lime) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.done-screen p { color: var(--cream-55); font-size: 15px; margin-bottom: 28px; }
+.stat-row { display: flex; gap: 10px; justify-content: center; }
+.stat-box {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  border-radius: var(--radius-s);
+  padding: var(--pad-s);
+  flex: 1;
+}
+.stat-num { font-family: var(--font-display); font-size: 28px; color: var(--lime); }
+.stat-label { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; color: var(--cream-40); letter-spacing: 0.04em; margin-top: 4px; }
+</style>
+
+<div class="stage">
+  <div class="topbar">
+    <svg class="logo" width="140" height="38" viewBox="0 0 704 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M204.799 192H140.798V0H204.799V192Z" fill="#EBE8D9"/>
+      <path d="M499.199 63.9999V192H563.218V115.199H576.017V192H627.217V115.199H640.017V192H703.999V63.9999H499.199Z" fill="#EBE8D9"/>
+      <path d="M358.399 192H486.399V63.9995H358.399V192ZM443.733 128C443.733 139.782 434.182 149.334 422.399 149.334C410.617 149.334 401.066 139.782 401.066 128C401.066 116.218 410.617 106.667 422.399 106.667C434.182 106.667 443.733 116.218 443.733 128Z" fill="#EBE8D9"/>
+      <path d="M217.599 192H345.599V63.9995H217.599V192ZM302.932 128C302.932 139.782 293.381 149.334 281.599 149.334C269.817 149.334 260.266 139.782 260.266 128C260.266 116.218 269.817 106.667 281.599 106.667C293.381 106.667 302.932 116.218 302.932 128Z" fill="#EBE8D9"/>
+      <path d="M63.9995 63.9997L102.401 0.000167847H38.4003L0 63.9997V192H128V63.9997H63.9995ZM85.333 128C85.333 139.782 75.782 149.333 63.9995 149.333C52.2181 149.333 42.666 139.782 42.666 128C42.666 116.218 52.2181 106.667 63.9995 106.667C75.782 106.667 85.333 116.218 85.333 128Z" fill="#EBE8D9"/>
+    </svg>
+    <div class="date-pill" id="datePill">Thu 23 Jul</div>
+  </div>
+
+  <div class="progress-row" id="progressRow"></div>
+
+  <div class="card-wrap" id="cardWrap"></div>
+
+  <div class="actions" id="actionsRow"></div>
+</div>
+
+<style>
+.send-error { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(255, 90, 90, 0.12); border: 1px solid rgba(255, 90, 90, 0.4); color: #ffb3b3; font-size: 13px; }
+.send-queued { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(200, 220, 120, 0.12); border: 1px solid rgba(200, 220, 120, 0.4); color: #dcead0; font-size: 13px; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-more { margin-top: 20px; padding: 12px 24px; border-radius: 999px; border: 1px solid rgba(200,220,120,0.5); background: transparent; color: #c8dc78; font-size: 14px; cursor: pointer; }
+.btn-more:hover { background: rgba(200,220,120,0.1); }
+.more-status { margin-top: 14px; font-size: 13px; color: #b7b2a3; max-width: 360px; }
+.refresh-btn { background: transparent; border: 1px solid var(--cream-12); color: var(--cream-75); border-radius: 999px; padding: 6px 14px; font-size: 12px; cursor: pointer; margin-left: 10px; }
+.refresh-btn:hover { background: rgba(255,255,255,0.06); }
+.apollo-banner { margin: 10px 0 0; padding: 10px 14px; border-radius: 8px; background: rgba(240,200,90,0.12); border: 1px solid rgba(240,200,90,0.35); color: #f0d178; font-size: 13px; max-width: 520px; }
+.loading-state { text-align: center; padding: 60px 20px; color: var(--cream-55); font-size: 15px; }
+.card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.card-header-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.btn-already-sent, .btn-existing-deal {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--cream-40);
+  background: transparent;
+  border: 1px solid var(--cream-12);
+  border-radius: 999px;
+  padding: 5px 12px;
+  height: auto;
+  flex: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 120ms var(--ease-interactive), border-color 120ms var(--ease-interactive);
+}
+.btn-already-sent:hover { color: var(--cream-75); border-color: var(--cream-40); }
+.btn-already-sent:active { transform: scale(0.97); }
+.btn-already-sent.marked { color: var(--lime); border-color: rgba(148,224,115,0.35); pointer-events: none; }
+.btn-existing-deal { color: var(--coral); border-color: rgba(247,105,56,0.3); }
+.btn-existing-deal:hover { color: var(--coral); border-color: rgba(247,105,56,0.6); background: rgba(247,105,56,0.08); }
+.btn-existing-deal:active { transform: scale(0.97); }
+.btn-existing-deal.marked { color: var(--coral); border-color: rgba(247,105,56,0.5); background: rgba(247,105,56,0.1); pointer-events: none; }
+</style>
+<script>
+const STORAGE_PREFIX = 'bloom_review_edits_v1';
+const STEP_LABELS = ['Day 0 · First touch', 'Day 3 · Bump', 'Day 7 · New angle', 'Day 12 · Deeper proof', 'Day 18 · Closing offer'];
+
+let today = null;
+let queue = [];
+let apolloConfigured = false;
+let edits = {};
+
+function loadEdits() {
+  try {
+    const raw = localStorage.getItem(STORAGE_PREFIX + ':' + today);
+    edits = raw ? JSON.parse(raw) : {};
+  } catch (e) { edits = {}; }
+}
+function saveEdits() {
+  try { localStorage.setItem(STORAGE_PREFIX + ':' + today, JSON.stringify(edits)); } catch (e) {}
+}
+
+function escapeHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+// Safely embed a string inside a single-quoted JS string literal in an inline
+// onclick="..." attribute. Without this, any item.id containing an apostrophe
+// (e.g. "st-james's-place-plc-step0") terminates the string early and breaks
+// the handler with a silent syntax error — the button then does nothing at all.
+function jsStr(s) {
+  return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+
+function formatDatePill(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+}
+
+function pendingItems() { return queue.filter(q => q.status === 'pending'); }
+
+function renderProgress() {
+  const row = document.getElementById('progressRow');
+  if (!row) return;
+  row.innerHTML = queue.map(q => {
+    const cls = q.status === 'pending' ? '' : 'done';
+    return `<div class="progress-seg ${cls}"></div>`;
+  }).join('');
+}
+
+function renderApolloBanner() {
+  const wrap = document.getElementById('cardWrap');
+  if (apolloConfigured) return;
+  const banner = document.createElement('div');
+  banner.className = 'apollo-banner';
+  banner.textContent = 'Apollo isn\'t connected yet — Send is disabled until an API key is added on the server. Hold still works.';
+  wrap.parentElement.insertBefore(banner, wrap);
+}
+
+function render() {
+  const pill = document.getElementById('datePill');
+  if (pill) pill.textContent = formatDatePill(today);
+  renderProgress();
+  const wrap = document.getElementById('cardWrap');
+  const actions = document.getElementById('actionsRow');
+  const pending = pendingItems();
+
+  if (!pending.length) {
+    const sent = queue.filter(q => q.status === 'sent').length;
+    const alreadySent = queue.filter(q => q.status === 'already_sent').length;
+    const existingDeal = queue.filter(q => q.status === 'existing_deal').length;
+    const held = queue.filter(q => q.status === 'held').length;
+    const extraBoxes = [
+      alreadySent > 0 ? `<div class="stat-box"><div class="stat-num">${alreadySent}</div><div class="stat-label">Already sent</div></div>` : '',
+      existingDeal > 0 ? `<div class="stat-box"><div class="stat-num">${existingDeal}</div><div class="stat-label">Existing deal</div></div>` : '',
+    ].join('');
+    const sentStatBoxes = `<div class="stat-box"><div class="stat-num">${sent}</div><div class="stat-label">Sent</div></div>${extraBoxes}<div class="stat-box"><div class="stat-num">${held}</div><div class="stat-label">Held</div></div>`;
+    wrap.innerHTML = `
+      <div class="done-screen">
+        <p class="big">All done for today</p>
+        <p>${queue.length} drafts reviewed. Next batch lands tomorrow at 9am.</p>
+        <div class="stat-row">
+          ${sentStatBoxes}
+        </div>
+        <button class="btn-more" id="moreBtn" onclick="goForMore()">Go for more ↗</button>
+        <div class="more-status" id="moreStatus" style="display:none;"></div>
+      </div>`;
+    actions.innerHTML = '';
+    return;
+  }
+
+  const item = pending[0];
+  const edit = edits[item.id] || {};
+  const bodyVal = edit.body || item.body;
+  const subjectVal = edit.subject || item.subject;
+  wrap.innerHTML = `
+    <div class="card" id="activeCard">
+      <div class="card-header">
+        <span class="pill step${item.step}">${STEP_LABELS[item.step]}</span>
+        <div class="card-header-actions">
+          <button class="btn-existing-deal" id="existingDealBtn" onclick="existingDealCurrent('${jsStr(item.id)}')" title="Already speaking to them elsewhere? Stop this sequence for good.">Existing deal</button>
+          <button class="btn-already-sent" id="alreadySentBtn" onclick="alreadySentCurrent('${jsStr(item.id)}')" title="This one's already been sent — mark it done without sending again.">Already sent</button>
+        </div>
+      </div>
+      <p class="company">${item.company}</p>
+      <p class="contact-line">${item.contact}</p>
+      <div class="to-subject">
+        <div><b>To</b> &nbsp;${item.to}</div>
+        <div style="display:flex; align-items:center; gap:4px;"><b>Subject</b> &nbsp;<input class="subject-input" id="subjectBox" value="${subjectVal.replace(/"/g, '&quot;')}" readonly /></div>
+      </div>
+      <div class="editing-flag">Editing — changes save when you hit send</div>
+      <textarea class="body-box" id="bodyBox" readonly>${bodyVal}</textarea>
+      <div class="send-error" id="sendError" style="display:none;"></div>
+      <div class="send-queued" id="sendQueued" style="display:none;"></div>
+    </div>`;
+  renderApolloBanner();
+
+  actions.innerHTML = `
+    <button class="btn-skip" id="holdBtn" onclick="holdCurrent('${jsStr(item.id)}')">Hold</button>
+    <button class="btn-edit" id="editBtn" onclick="toggleEdit()">Edit</button>
+    <button class="btn-send" id="sendBtn" onclick="sendCurrent('${jsStr(item.id)}')" ${apolloConfigured ? '' : 'disabled title="Apollo API key not set yet"'}>Send ↗</button>
+  `;
+}
+
+function toggleEdit() {
+  const card = document.getElementById('activeCard');
+  const box = document.getElementById('bodyBox');
+  const subjectBox = document.getElementById('subjectBox');
+  const btn = document.getElementById('editBtn');
+  const isEditing = card.classList.toggle('editing');
+  box.readOnly = !isEditing;
+  subjectBox.readOnly = !isEditing;
+  btn.textContent = isEditing ? 'Done' : 'Edit';
+  if (isEditing) {
+    subjectBox.focus();
+  } else {
+    const item = pendingItems()[0];
+    if (item) {
+      edits[item.id] = { subject: subjectBox.value, body: box.value };
+      saveEdits();
+    }
+  }
+}
+
+async function holdCurrent(id) {
+  try {
+    await fetch(`/api/items/${id}/hold`, { method: 'POST' });
+  } catch (e) { console.error('hold failed', e); }
+  const item = queue.find(q => q.id === id);
+  if (item) item.status = 'held';
+  render();
+}
+
+async function alreadySentCurrent(id) {
+  const btn = document.getElementById('alreadySentBtn');
+  if (btn) { btn.textContent = 'Marked ✓'; btn.classList.add('marked'); }
+  try {
+    await fetch(`/api/items/${id}/already-sent`, { method: 'POST' });
+  } catch (e) { console.error('already-sent failed', e); }
+  const item = queue.find(q => q.id === id);
+  if (item) item.status = 'already_sent';
+  setTimeout(render, 350);
+}
+
+// Permanently stops the automated sequence for this contact (Joe is already
+// talking to them elsewhere) by adding them to a fixed Apollo list, via the
+// server route which resolves the contact by email and merges the list into
+// their existing Apollo list membership. Distinct from "already sent" — this
+// survives past today.
+async function existingDealCurrent(id) {
+  const item = queue.find(q => q.id === id);
+  if (!item) return;
+  const btn = document.getElementById('existingDealBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Flagging…'; }
+  try {
+    const res = await fetch(`/api/items/${id}/existing-deal`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to: item.to }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const box = document.getElementById('sendError');
+      if (box) { box.style.display = 'block'; box.textContent = data.message || 'Could not flag this contact — nothing was changed.'; }
+      if (btn) { btn.disabled = false; btn.textContent = 'Existing deal'; }
+      return;
+    }
+  } catch (e) {
+    console.error('existing-deal failed', e);
+    const box = document.getElementById('sendError');
+    if (box) { box.style.display = 'block'; box.textContent = 'Could not reach the server — nothing was flagged.'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Existing deal'; }
+    return;
+  }
+  if (btn) { btn.textContent = 'Flagged ✓'; btn.classList.add('marked'); }
+  item.status = 'existing_deal';
+  setTimeout(render, 350);
+}
+
+function showSendError(msg) {
+  const box = document.getElementById('sendError');
+  if (box) { box.style.display = 'block'; box.textContent = msg; }
+  const sendBtn = document.getElementById('sendBtn');
+  const holdBtn = document.getElementById('holdBtn');
+  const editBtn = document.getElementById('editBtn');
+  if (sendBtn) { sendBtn.disabled = !apolloConfigured; sendBtn.classList.remove('sending'); sendBtn.textContent = 'Send ↗'; }
+  if (holdBtn) holdBtn.disabled = false;
+  if (editBtn) editBtn.disabled = false;
+}
+
+function showSendQueued(id, msg) {
+  const box = document.getElementById('sendQueued');
+  if (box) { box.style.display = 'block'; box.textContent = msg; }
+  const item = queue.find(q => q.id === id);
+  if (item) item.status = 'sent';
+  const sendBtn = document.getElementById('sendBtn');
+  const holdBtn = document.getElementById('holdBtn');
+  const editBtn = document.getElementById('editBtn');
+  if (sendBtn) { sendBtn.disabled = true; sendBtn.classList.remove('sending'); sendBtn.textContent = 'Queued in Apollo ✓'; }
+  if (holdBtn) holdBtn.disabled = true;
+  if (editBtn) editBtn.disabled = true;
+}
+
+async function sendCurrent(id) {
+  const item = queue.find(q => q.id === id);
+  if (!item) return;
+  const subjectBox = document.getElementById('subjectBox');
+  const bodyBox = document.getElementById('bodyBox');
+  const subject = subjectBox.value;
+  const body = bodyBox.value;
+  edits[id] = { subject, body };
+  saveEdits();
+
+  const sendBtn = document.getElementById('sendBtn');
+  const holdBtn = document.getElementById('holdBtn');
+  const editBtn = document.getElementById('editBtn');
+  sendBtn.disabled = true; holdBtn.disabled = true; editBtn.disabled = true;
+  sendBtn.classList.add('sending');
+  sendBtn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch(`/api/items/${id}/send`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to: item.to, subject, body }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showSendError(data.message || `Server error (${res.status}) — nothing confirmed sent.`);
+      return;
+    }
+    if (data.status === 'failed') {
+      showSendError(data.message);
+      return;
+    }
+    if (data.status === 'queued') {
+      showSendQueued(id, data.message);
+      return;
+    }
+    item.status = 'sent';
+    render();
+  } catch (err) {
+    console.error('Bloom send failed', err);
+    showSendError('Could not reach the server — nothing was confirmed sent. Check your connection and try again.');
+  }
+}
+
+async function goForMore() {
+  const btn = document.getElementById('moreBtn');
+  const status = document.getElementById('moreStatus');
+  if (btn) { btn.disabled = true; btn.textContent = 'Researching more…'; }
+  if (status) { status.style.display = 'block'; status.textContent = 'Asking the research job for more accounts…'; }
+  try {
+    const res = await fetch('/api/research-more', { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok) {
+      if (status) status.textContent = data.message || 'Not available yet in the standalone site.';
+    } else if (status) {
+      status.textContent = 'Done — reload to see new emails.';
+    }
+  } catch (err) {
+    console.error('goForMore failed', err);
+    if (status) status.textContent = 'Something went wrong reaching the server.';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Go for more ↗'; }
+  }
+}
+
+async function init() {
+  const wrap = document.getElementById('cardWrap');
+  wrap.innerHTML = '<div class="loading-state">Loading today\'s queue…</div>';
+  try {
+    const [healthRes, queueRes] = await Promise.all([
+      fetch('/api/health').then(r => r.json()),
+      fetch('/api/queue').then(r => r.json()),
+    ]);
+    apolloConfigured = !!healthRes.apolloConfigured;
+    today = queueRes.today;
+    queue = queueRes.queue || [];
+    loadEdits();
+    render();
+  } catch (err) {
+    console.error('init failed', err);
+    wrap.innerHTML = '<div class="loading-state">Could not load today\'s queue — check that the server is running.</div>';
+  }
+}
+
+function addRefreshButton() {
+  const bar = document.querySelector('.topbar');
+  if (!bar) return;
+  const btn = document.createElement('button');
+  btn.className = 'refresh-btn';
+  btn.textContent = 'Refresh';
+  btn.onclick = () => location.reload();
+  bar.appendChild(btn);
+}
+
+addRefreshButton();
+init();
+</script>

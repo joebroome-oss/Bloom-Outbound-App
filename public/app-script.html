@@ -185,13 +185,36 @@ async function holdCurrent(id) {
   render();
 }
 
+// Marks this step done AND flags the contact in Apollo with a one-shot
+// "Bloom: Confirmed Sent" label (via the server, which merges it into their
+// existing Apollo list membership) so tomorrow's Cowork scheduled run
+// permanently logs the pending step as sent and advances the sequence to its
+// next step on the normal cadence — this survives past today, unlike the
+// bare local status flip alone would. If the server reports it couldn't flag
+// Apollo (e.g. API key missing, contact not found), the item is still marked
+// done here for today, but a warning is shown since it may resurface
+// tomorrow until Apollo's own activity date independently confirms it.
 async function alreadySentCurrent(id) {
-  const btn = document.getElementById('alreadySentBtn');
-  if (btn) { btn.textContent = 'Marked ✓'; btn.classList.add('marked'); }
-  try {
-    await fetch(`/api/items/${id}/already-sent`, { method: 'POST' });
-  } catch (e) { console.error('already-sent failed', e); }
   const item = queue.find(q => q.id === id);
+  const btn = document.getElementById('alreadySentBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Marking…'; }
+  try {
+    const res = await fetch(`/api/items/${id}/already-sent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to: item && item.to }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (data && data.warning) {
+      const box = document.getElementById('sendError');
+      if (box) { box.style.display = 'block'; box.textContent = data.warning; }
+    }
+  } catch (e) {
+    console.error('already-sent failed', e);
+    const box = document.getElementById('sendError');
+    if (box) { box.style.display = 'block'; box.textContent = 'Could not reach the server — marked done here only; this may resurface tomorrow.'; }
+  }
+  if (btn) { btn.textContent = 'Marked ✓'; btn.classList.add('marked'); }
   if (item) item.status = 'already_sent';
   setTimeout(render, 350);
 }

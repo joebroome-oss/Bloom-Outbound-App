@@ -118,13 +118,41 @@ app.post('/api/items/:id/hold', (req, res) => {
 });
 
 // General-purpose override, not scoped to "today": marks a queue item done
-// without calling Apollo, for whenever this dashboard is showing something
-// that's already actually been sent — whether that was earlier today (e.g. a
-// same-day re-sync after a copy fix reset it to 'pending') or on a previous
-// day. Never triggers a duplicate send.
-app.post('/api/items/:id/already-sent', (req, res) => {
-  const data = store.markStatus(req.params.id, 'already_sent');
-  res.json({ ok: true, data });
+// for whenever this dashboard is showing something that's already actually
+// been sent — whether that was earlier today (e.g. a same-day re-sync after a
+// copy fix reset it to 'pending') or on a previous day. Never triggers a
+// duplicate send. Also flags the contact in Apollo with a one-shot "Bloom:
+// Confirmed Sent" label (mirrors "existing-deal" below) so tomorrow's Cowork
+// scheduled run permanently logs the pending step as sent and advances the
+// sequence to its next step on the normal cadence — without this, an item
+// only hidden in this file's queue.json would resurface the next time the
+// daily sync overwrites it, since that overwrite doesn't carry statuses
+// forward. Requires the contact's email (`to`) so we can look them up in
+// Apollo; still marks the item done locally even if the Apollo call fails, so
+// Joe isn't blocked, but logs the failure.
+app.post('/api/items/:id/already-sent', async (req, res) => {
+  const { id } = req.params;
+  const { to } = req.body || {};
+  let apolloWarning = null;
+  if (!to) {
+    apolloWarning = 'No contact email provided — marked done here only; this may resurface tomorrow if Apollo never confirms it independently.';
+  } else if (!apollo.isConfigured()) {
+    apolloWarning = 'Apollo API key not set on the server yet — marked done here only; this may resurface tomorrow.';
+  } else {
+    try {
+      const contact = await apollo.findContactByEmail(to);
+      if (!contact) {
+        apolloWarning = `Could not find ${to} in Apollo by exact email — marked done here only; this may resurface tomorrow.`;
+      } else {
+        await apollo.addConfirmedSentLabel(contact);
+      }
+    } catch (err) {
+      console.error('Already-sent Apollo flag failed', err);
+      apolloWarning = 'Could not flag this contact in Apollo — marked done here only; this may resurface tomorrow.';
+    }
+  }
+  const data = store.markStatus(id, 'already_sent');
+  res.json({ ok: true, data, warning: apolloWarning });
 });
 
 // Permanently stops the automated sequence for this contact because Joe is

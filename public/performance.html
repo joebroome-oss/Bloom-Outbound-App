@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bloom Outbound — Performance</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f5f2ed;
+  color: #24231f;
+}
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 28px; border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.topbar .brand { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+.topbar a.back {
+  font-family: 'SF Mono', Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+  color: #6b6a63; text-decoration: none; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px;
+  padding: 6px 14px;
+}
+.topbar a.back:hover { background: rgba(0,0,0,0.04); }
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 60px; }
+h1 { font-size: 24px; font-weight: 700; margin: 0 0 6px; }
+.subtitle { color: #6b6a63; font-size: 13px; margin: 0 0 36px; }
+.subtitle b { color: #24231f; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+.stat {
+  background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 20px;
+  padding: 26px 20px; text-align: center;
+}
+.stat .num { font-size: 40px; font-weight: 700; line-height: 1; }
+.stat .label {
+  font-family: 'SF Mono', Menlo, monospace; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.04em; color: #6b6a63; margin-top: 10px;
+}
+.stat.sent .num { color: #4f8a2e; }
+.stat.opened .num { color: #c58a1a; }
+.stat.replied .num { color: #cf5326; }
+
+.note {
+  font-size: 13px; line-height: 1.55; color: #4a4940; background: #fff;
+  border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+}
+.note b { color: #24231f; }
+
+footer { text-align: center; font-size: 11.5px; color: #a9a79c; margin-top: 28px; }
+@media (max-width: 520px) { .stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">bloom</div>
+    <a class="back" href="/">← Review queue</a>
+  </div>
+  <div class="wrap">
+    <h1>Outbound performance</h1>
+    <p class="subtitle">As of <b id="asOf">–</b></p>
+
+    <div class="stats">
+      <div class="stat sent"><div class="num" id="numSent">–</div><div class="label">Sent</div></div>
+      <div class="stat opened"><div class="num" id="numOpened">–</div><div class="label">Opened</div></div>
+      <div class="stat replied"><div class="num" id="numReplied">–</div><div class="label">Replied</div></div>
+    </div>
+
+    <div class="note" id="noteOpens"></div>
+    <div class="note" id="noteReplies"></div>
+
+    <footer>Sent count from HubSpot's logged Apollo emails. Opens from HubSpot. Replies from a direct Gmail scan.</footer>
+  </div>
+
+<script>
+fetch('/data/performance.json').then(r => r.json()).then(d => {
+  document.getElementById('asOf').textContent = new Date(d.as_of).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+  document.getElementById('numSent').textContent = d.sent;
+  document.getElementById('numOpened').textContent = d.open_rate_pct + '%';
+  document.getElementById('numReplied').textContent = d.replied;
+  document.getElementById('noteOpens').innerHTML = '<b>Opens:</b> ' + d.note_opens;
+  document.getElementById('noteReplies').innerHTML = '<b>Replies:</b> ' + d.note_replies;
+}).catch(() => {
+  document.querySelector('.wrap').innerHTML = '<p>Could not load performance data.</p>';
+});
+</script>
+</body>
+</html>

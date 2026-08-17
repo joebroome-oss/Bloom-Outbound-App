@@ -276,6 +276,11 @@ function showSendQueued(id, msg) {
   if (sendBtn) { sendBtn.disabled = true; sendBtn.classList.remove('sending'); sendBtn.textContent = 'Queued in Apollo ✓'; }
   if (holdBtn) holdBtn.disabled = true;
   if (editBtn) editBtn.disabled = true;
+  // Bug fix (2026-08-17): this left the card stuck on "Queued in Apollo ✓" forever —
+  // item.status was updated correctly, but nothing ever called render() to advance to
+  // the next card, so Joe had to manually hit Refresh to get unstuck. Give him a moment
+  // to read the queued message, then auto-advance like every other terminal action does.
+  setTimeout(render, 1500);
 }
 
 async function sendCurrent(id) {

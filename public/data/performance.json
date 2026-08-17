@@ -1,0 +1,11 @@
+{
+  "as_of": "2026-08-17",
+  "sent": 59,
+  "opened": 0,
+  "open_rate_pct": 0,
+  "replied": 0,
+  "note_opens": "HubSpot is not recording opens for these emails yet (checked every logged send — all show 0). Likely a tracking-sync gap between Apollo and HubSpot, not that nobody opened anything. Worth checking with Apollo/HubSpot support.",
+  "note_replies": "Scanned Gmail directly. No one has replied to the sequence itself yet. 2 auto-replies came back (Davidson Kempner, Revolut) — one confirms a contact (Jennifer Wall) has left the company.",
+  "accounts_active": 27,
+  "accounts_stopped": 3
+}

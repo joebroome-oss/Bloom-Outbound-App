@@ -4,84 +4,108 @@
 <meta charset="utf-8">
 <title>Bloom Outbound — Performance</title>
 <style>
-:root { color-scheme: light; }
+:root {
+  --bg:        #1a1a1a;
+  --bg2:       #22252b;
+  --cream:     #ebe8d9;
+  --cream-75:  rgba(235, 232, 217, 0.75);
+  --cream-55:  rgba(235, 232, 217, 0.55);
+  --cream-40:  rgba(235, 232, 217, 0.40);
+  --cream-12:  rgba(235, 232, 217, 0.12);
+  --cream-08:  rgba(235, 232, 217, 0.06);
+  --lime:      #94e073;
+  --coral:     #f76938;
+  --yellow:    #ffd62b;
+  --pad-s: 24px;
+  --radius-s: 16px;
+  --font-display: 'Riforma LL Medium', Inter, sans-serif;
+  --font-body: 'Riforma LL Regular', Inter, -apple-system, sans-serif;
+  --font-mono: 'Akkurat Mono LL Regular', 'Fragment Mono', monospace;
+}
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #f5f2ed;
-  color: #24231f;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-body);
 }
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 28px; border-bottom: 1px solid rgba(0,0,0,0.08);
-}
-.topbar .brand { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
-.topbar a.back {
-  font-family: 'SF Mono', Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #6b6a63; text-decoration: none; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px;
+.stage { min-height: 100vh; padding: 40px 20px 60px; display: flex; flex-direction: column; align-items: center; }
+.topbar { width: 100%; max-width: 560px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.logo { height: 22px; }
+.back-pill {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--cream-55); text-decoration: none; border: 1px solid var(--cream-12); border-radius: 999px;
   padding: 6px 14px;
 }
-.topbar a.back:hover { background: rgba(0,0,0,0.04); }
-
-.wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 60px; }
-h1 { font-size: 24px; font-weight: 700; margin: 0 0 6px; }
-.subtitle { color: #6b6a63; font-size: 13px; margin: 0 0 36px; }
-.subtitle b { color: #24231f; }
-
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
-.stat {
-  background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 20px;
-  padding: 26px 20px; text-align: center;
+.back-pill:hover { background: var(--cream-08); }
+.wrap { width: 100%; max-width: 560px; }
+h1 { font-family: var(--font-display); font-weight: 500; font-size: 26px; letter-spacing: -0.02em; margin: 0 0 6px; }
+.subtitle {
+  color: var(--cream-55); font-size: 13px; margin: 0 0 28px;
+  font-family: var(--font-mono); letter-spacing: 0.02em;
 }
-.stat .num { font-size: 40px; font-weight: 700; line-height: 1; }
-.stat .label {
-  font-family: 'SF Mono', Menlo, monospace; font-size: 11px; text-transform: uppercase;
-  letter-spacing: 0.04em; color: #6b6a63; margin-top: 10px;
+.subtitle b { color: var(--cream); font-family: var(--font-body); }
+.stats { display: flex; gap: 10px; margin-bottom: 22px; }
+.stat-box {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  border-radius: var(--radius-s);
+  padding: var(--pad-s);
+  flex: 1;
+  text-align: center;
+  border: 1px solid var(--cream-08);
 }
-.stat.sent .num { color: #4f8a2e; }
-.stat.opened .num { color: #c58a1a; }
-.stat.replied .num { color: #cf5326; }
-
+.stat-num { font-family: var(--font-display); font-weight: 500; font-size: 32px; letter-spacing: -0.02em; }
+.stat-label {
+  font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
+  color: var(--cream-40); letter-spacing: 0.04em; margin-top: 6px;
+}
+.stat-box.sent .stat-num { color: var(--lime); }
+.stat-box.opened .stat-num { color: var(--yellow); }
+.stat-box.replied .stat-num { color: var(--coral); }
 .note {
-  font-size: 13px; line-height: 1.55; color: #4a4940; background: #fff;
-  border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+  font-size: 13px; line-height: 1.55; color: var(--cream-75);
+  background: var(--cream-08); border: 1px solid var(--cream-12);
+  border-radius: var(--radius-s); padding: 16px 18px; margin-bottom: 12px;
+  font-family: var(--font-body);
 }
-.note b { color: #24231f; }
-
-footer { text-align: center; font-size: 11.5px; color: #a9a79c; margin-top: 28px; }
-@media (max-width: 520px) { .stats { grid-template-columns: 1fr; } }
+.note b { color: var(--cream); font-family: var(--font-display); font-weight: 500; }
+footer { text-align: center; font-size: 11px; color: var(--cream-40); margin-top: 24px; font-family: var(--font-mono); letter-spacing: 0.02em; }
+@media (max-width: 480px) { .stats { flex-direction: column; } }
 </style>
 </head>
 <body>
+<div class="stage">
   <div class="topbar">
-    <div class="brand">bloom</div>
-    <a class="back" href="/">← Review queue</a>
+    <svg class="logo" width="140" height="38" viewBox="0 0 704 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M204.799 192H140.798V0H204.799V192Z" fill="#EBE8D9"/>
+      <path d="M499.199 63.9999V192H563.218V115.199H576.017V192H627.217V115.199H640.017V192H703.999V63.9999H499.199Z" fill="#EBE8D9"/>
+      <path d="M358.399 192H486.399V63.9995H358.399V192ZM443.733 128C443.733 139.782 434.182 149.334 422.399 149.334C410.617 149.334 401.066 139.782 401.066 128C401.066 116.218 410.617 106.667 422.399 106.667C434.182 106.667 443.733 116.218 443.733 128Z" fill="#EBE8D9"/>
+      <path d="M217.599 192H345.599V63.9995H217.599V192ZM302.932 128C302.932 139.782 293.381 149.334 281.599 149.334C269.817 149.334 260.266 139.782 260.266 128C260.266 116.218 269.817 106.667 281.599 106.667C293.381 106.667 302.932 116.218 302.932 128Z" fill="#EBE8D9"/>
+      <path d="M63.9995 63.9997L102.401 0.000167847H38.4003L0 63.9997V192H128V63.9997H63.9995ZM85.333 128C85.333 139.782 75.782 149.333 63.9995 149.333C52.2181 149.333 42.666 139.782 42.666 128C42.666 116.218 52.2181 106.667 63.9995 106.667C75.782 106.667 85.333 116.218 85.333 128Z" fill="#EBE8D9"/>
+    </svg>
+    <a class="back-pill" href="/">← Review queue</a>
   </div>
   <div class="wrap">
     <h1>Outbound performance</h1>
     <p class="subtitle">As of <b id="asOf">–</b></p>
-
     <div class="stats">
-      <div class="stat sent"><div class="num" id="numSent">–</div><div class="label">Sent</div></div>
-      <div class="stat opened"><div class="num" id="numOpened">–</div><div class="label">Opened</div></div>
-      <div class="stat replied"><div class="num" id="numReplied">–</div><div class="label">Replied</div></div>
+      <div class="stat-box sent"><div class="stat-num" id="numSent">–</div><div class="stat-label">Sent</div></div>
+      <div class="stat-box opened"><div class="stat-num" id="numOpened">–</div><div class="stat-label">Opened</div></div>
+      <div class="stat-box replied"><div class="stat-num" id="numReplied">–</div><div class="stat-label">Replied</div></div>
     </div>
-
     <div class="note" id="noteOpens"></div>
     <div class="note" id="noteReplies"></div>
-
-    <footer>Sent count from HubSpot's logged Apollo emails. Opens from HubSpot. Replies from a direct Gmail scan.</footer>
+    <footer>Sent from HubSpot's logged Apollo emails · Opens from HubSpot · Replies from a direct Gmail scan</footer>
   </div>
-
+</div>
 <script>
 fetch('/data/performance.json').then(r => r.json()).then(d => {
   document.getElementById('asOf').textContent = new Date(d.as_of).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
   document.getElementById('numSent').textContent = d.sent;
   document.getElementById('numOpened').textContent = d.open_rate_pct + '%';
   document.getElementById('numReplied').textContent = d.replied;
-  document.getElementById('noteOpens').innerHTML = '<b>Opens:</b> ' + d.note_opens;
-  document.getElementById('noteReplies').innerHTML = '<b>Replies:</b> ' + d.note_replies;
+  document.getElementById('noteOpens').innerHTML = '<b>Opens —</b> ' + d.note_opens;
+  document.getElementById('noteReplies').innerHTML = '<b>Replies —</b> ' + d.note_replies;
 }).catch(() => {
   document.querySelector('.wrap').innerHTML = '<p>Could not load performance data.</p>';
 });

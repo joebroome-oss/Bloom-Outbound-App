@@ -1,5 +1,5 @@
 {
-  "today": "2026-08-17",
+  "today": "2026-09-11",
   "queue": [
     {
       "id": "zopa-bank-ltd-step2",
@@ -119,6 +119,16 @@
       "step": 1,
       "subject": "quick one on FactSet's restructuring",
       "body": "Hi Jasmine,\n\nknow inboxes get buried so just bumping this. Firms restructuring at this scale are usually paying full coaching rates for a handful of senior people, without a way to prove it's actually helping managers hold the team together.\n\nBloom proves ROI from day one, we tracked a 19% jump in time efficiency for MSCI's leadership team inside the first quarter.\n\nWorth a look?\n\nJoe",
+      "status": "pending"
+    },
+    {
+      "id": "tp-icap-step1",
+      "company": "TP ICAP",
+      "contact": "Kate Roberts, Global Head of Talent and Performance",
+      "to": "kate.roberts@tpicap.com",
+      "step": 1,
+      "subject": "quick one on TP ICAP's Vantage Capital Markets deal",
+      "body": "Hi Kate,\n\nknow inboxes get buried so just bumping this. Most firms integrating an acquisition this size are paying full coaching rates for a handful of senior people, without a way to prove it's actually embedding.\n\nBloom proves ROI from day one, MSCI's leadership team saw a 19% jump in time efficiency inside the first quarter.\n\nWorth a look?\n\nJoe",
       "status": "pending"
     },
     {

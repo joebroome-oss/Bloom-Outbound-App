@@ -1,5 +1,5 @@
 {
-  "today": "2026-09-16",
+  "today": "2026-09-17",
   "queue": [
     {
       "id": "zopa-bank-ltd-step3",
@@ -152,6 +152,16 @@
       "status": "pending"
     },
     {
+      "id": "schroders-step1",
+      "company": "Schroders",
+      "contact": "Stephanie Ashmore, Global Head of Talent",
+      "to": "stephanie.ashmore@schroders.com",
+      "step": 1,
+      "subject": "quick one on Schroders Wealth Management's leadership reshuffle",
+      "body": "Hi Stephanie,\n\nknow inboxes get buried so just bumping this. Firms bringing in this much new senior leadership at once are usually paying full coaching rates for a handful of people, without being able to prove it's sticking.\n\nBloom proves ROI from day one, we tracked a 19% jump in time efficiency for MSCI's leadership team inside the first quarter.\n\nWorth a look?\n\nJoe",
+      "status": "pending"
+    },
+    {
       "id": "nationwide-building-society-step2",
       "company": "Nationwide Building Society",
       "contact": "Lynn McManus, Chief People Officer",
@@ -189,6 +199,16 @@
       "step": 2,
       "subject": "the integration gap across AtData, Own Up and Konfir",
       "body": "Hi James,\n\nthree acquisitions in a few months means three sets of managers who've never operated inside Experian's structure before, that's usually where things click or quietly don't.\n\nInforma hit the same wall integrating through M&A with their One Informa initiative, and coaching drove a 38% improvement in leadership capability with a 73% goal-completion rate in the first 90 days.\n\nFree pilot, just 5 people to start.\n\n15 minutes this week or next?\n\nJoe",
+      "status": "pending"
+    },
+    {
+      "id": "rathbones-step1",
+      "company": "Rathbones",
+      "contact": "Beth Houghton, Head of Talent Acquisition",
+      "to": "elizabeth.ritchie@rathbones.com",
+      "step": 1,
+      "subject": "quick one on Rathbones' leadership rebuild",
+      "body": "Hi Beth,\n\nknow inboxes get buried so just bumping this. Most firms rebuilding a leadership team are paying full coaching rates for a handful of senior people, without a way to prove it's actually sticking.\n\nBloom proves ROI from day one, we tracked a 19% jump in time efficiency for MSCI's leadership team inside the first quarter.\n\nWorth a look?\n\nJoe",
       "status": "pending"
     },
     {
